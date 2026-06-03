@@ -10,7 +10,8 @@
 # Environment files
 .env
 
-
+# Plannification Source docs not required
+*.kra
 
 # Build results
 bin/
