@@ -1,0 +1,17 @@
+﻿.navbar-icon-link {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    padding: 0.25rem 0.5rem;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.navbar-icon-link:hover {
+    color: #ffffff;
+}
+
+.global-navbar {
+    background-color: #357535;
+}
