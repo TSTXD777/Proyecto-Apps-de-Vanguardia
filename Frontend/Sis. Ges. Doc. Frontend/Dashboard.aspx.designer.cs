@@ -13,5 +13,32 @@ namespace Sis.Ges.Doc.Frontend
 
     public partial class Dashboard
     {
+
+        /// <summary>
+        /// btnRegistroDocs control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnRegistroDocs;
+
+        /// <summary>
+        /// btnConsultaDocs control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnConsultaDocs;
+
+        /// <summary>
+        /// btnBitacora control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnBitacora;
     }
 }

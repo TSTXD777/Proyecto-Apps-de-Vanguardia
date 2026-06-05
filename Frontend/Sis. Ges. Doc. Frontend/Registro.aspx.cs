@@ -13,5 +13,10 @@ namespace Sis.Ges.Doc.Frontend
         {
 
         }
+
+        protected void btnRegistrar_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

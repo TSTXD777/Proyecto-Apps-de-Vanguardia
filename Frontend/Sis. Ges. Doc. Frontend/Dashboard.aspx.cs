@@ -13,5 +13,20 @@ namespace Sis.Ges.Doc.Frontend
         {
 
         }
+
+        protected void btnRegistroDocs_Click(object sender, EventArgs e)
+        {
+            //Response.Redirect("RegistroDocumentos.aspx");
+        }
+
+        protected void btnConsultaDocs_Click(object sender, EventArgs e)
+        {
+            //Response.Redirect("ConsultaDocumentos.aspx");
+        }
+
+        protected void btnBitacora_Click(object sender, EventArgs e)
+        {
+            //
+        }
     }
 }
