@@ -42,9 +42,9 @@
             <div class="container-fluid d-flex justify-content-between align-items-center">
 
                 <%-- Home icon on the left --%>
-                <a class="navbar-icon-link" runat="server" href="~/" title="Home">
-                    <i class="bi bi-house-fill"></i>
-                </a>
+              <a class="navbar-icon-link" runat="server" href="~/Dashboard.aspx" title="Home">
+    <i class="bi bi-house-fill"></i>
+</a>
 
                 <%-- Empty middle space (flex handles this automatically) --%>
 

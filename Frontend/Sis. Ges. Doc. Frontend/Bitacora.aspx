@@ -39,14 +39,16 @@
 <body>
     <form id="form1" runat="server" class="page">
         <div class="header">
-            <div class="brand">
-                <div class="icon">🏠</div>
-            </div>
-            <div class="title">Bitácora</div>
-            <div class="brand">
-                <div class="icon">👤</div>
-            </div>
-        </div>
+    <a href="Dashboard.aspx" class="icon" style="text-decoration:none;">
+        🏠
+    </a>
+
+    <div class="title">Bitácora</div>
+
+    <a href="Login.aspx" class="icon" style="text-decoration:none;">
+    👤
+</a>
+</div>
 
         <div class="content">
             <aside class="sidebar">
