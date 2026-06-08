@@ -1,0 +1,97 @@
+# Frontend
+
+- [ ] Login
+	- [ ] Logo
+	- [ ] User
+		- [ ] Verificar Usuario
+	- [ ] Password
+		- [ ] Verificar Contraseña
+	- [ ] Botón Log in
+- [ ] Dashboard
+	- [ ] Links
+		- [ ] Registro de Docs
+		- [ ] Consulta de Doc
+		- [ ] Bitácora
+			- [ ] Solo se muestra si es admin
+		- [ ] Ícono de Perfil
+- [ ] Registro de Docs
+	- [ ] Campos del Form
+		- [ ] Nombre del Doc
+		- [ ] Descripción de Doc
+		- [ ] Categoría de Doc
+			- [ ] Get categorías del backend
+		- [ ] Fecha del Documento
+	- [ ] Botón para subir archivo
+	- [ ] Botón de Registrar
+		- [ ] Sube el archivo con {nombrearchivo_SHA256} a la carpeta ~/Docs 
+		- [ ] Sube la info a la BD
+- [ ] Consultar Docs
+	- [ ] Barra de búsqueda
+	- [ ] Barra lateral de Filtros
+		- [ ] Filtrar por categoría
+		- [ ] Filtrar por fecha
+	- [ ] Tabla con los resultados
+		- [ ] Al hacer click a un resultado se redirige a Detalles de Doc
+- [ ] Detalles del Doc
+	- [ ] Preview del documento
+	- [ ] Datos del documento
+		- [ ] Nombre
+		- [ ] Descripción
+		- [ ] Categoría
+		- [ ] Fecha del Doc
+		- [ ] Usuario que subió el documento
+		- [ ] Fecha de Subida
+		- [ ] Última Fecha de modificación
+			- [ ] No mostrar si no existe
+		- [ ] SHA256 del Doc
+	- [ ] Botón de editar
+		- [ ] Solo mostrar si el usuario tiene los permisos
+			- [ ] Sea admin
+			- [ ] Sea quien subió el documento originalmente
+		- [ ] Modal de Editar detalles
+			- [ ] Autocompletar con info existente
+			- [ ] Nombre
+			- [ ] Descripción
+			- [ ] Categoría
+			- [ ] Fecha del Doc
+			- [ ] Botón de Cancelar
+			- [ ] Botón de Guardar
+				- [ ] Actualizar datos existentes
+				- [ ] Añadir datos de ultima actualización como fecha de ultima modificación, etc.
+	- [ ] Botón de Descarga
+- [ ] Bitácora
+	- [ ] Mostrar puro texto generado de los cambios
+- [ ] Página de Perfil
+	- [ ] Configuración de Perfil
+		- [ ] Usuario
+		- [ ] Correo
+		- [ ] Nombre
+		- [ ] Apellido
+		- [ ] Guardar Cambios
+	- [ ] Cambio de contraseña
+		- [ ] Antigua Password
+		- [ ] Nueva Password
+		- [ ] Cambiar
+- [ ] Configuración de Admin
+	- [ ] Administrar cuentas
+		- [ ] Cambiar nivel de permiso de cuentas
+	- [ ] Administración de Categorías
+		- [ ] Tabla con las categorías
+		- [ ] Modal para renombrar la categoría
+
+# Backend
+
+- [ ] Documentos
+	- [ ] CRUD de la Tabla 'Documentos' en la BD usando Procedimientos Almacenados
+	- [ ] Handlers
+		- [ ] Subir archivo
+		- [ ] Descargar Archivo
+	- [ ] Generación de metadata en SHA256
+- [ ] Usuarios
+	- [ ] CRUD de la Tabla 'Usuarios' en la BD usando Procedimientos Almacenados
+	- [ ] Encripción de Contraseñas usando SHA256
+- [ ] Categorías
+    - [ ] CRUD de la Tabla 'Categorias' en la BD usando Procedimientos Almacenados
+- [ ] Departamentos
+    - [ ] CRUD de la Tabla 'Departamentos' en la BD usando Procedimientos Almacenados
+- [ ] Bitácora automática usando Triggers
