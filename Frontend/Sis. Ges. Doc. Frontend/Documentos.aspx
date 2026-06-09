@@ -32,7 +32,9 @@
 <body>
     <form id="form1" runat="server">
         <div class="topbar">
-            <div class="left">🏠</div>
+              <a href="Dashboard.aspx" class="icon" style="text-decoration:none;">
+        🏠
+    </a>
             <div class="center">&nbsp;</div>
             <div class="right" style="text-align:right">👤</div>
         </div>

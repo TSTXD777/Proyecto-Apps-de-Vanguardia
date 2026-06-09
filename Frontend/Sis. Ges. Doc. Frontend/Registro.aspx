@@ -28,7 +28,9 @@
 <body>
     <form id="form1" runat="server">
         <div class="header">
-            <div class="icon" title="Home">🏠</div>
+              <a href="Dashboard.aspx" class="icon" style="text-decoration:none;">
+        🏠
+    </a>
             <div class="icon" title="Profile">👤</div>
         </div>
 
