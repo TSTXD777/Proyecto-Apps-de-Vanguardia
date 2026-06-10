@@ -68,10 +68,11 @@
 
                 </asp:Panel>
 
-                <asp:Button ID="btnAdministrarUsuarios"
+                                <asp:Button ID="btnAdministrarUsuarios"
                     runat="server"
                     CssClass="btn"
-                    Text="Administrar Usuarios" />
+                    Text="Administrar Usuarios"
+                    PostBackUrl="~/Usuarios.aspx" />
 
             </asp:Panel>
 
