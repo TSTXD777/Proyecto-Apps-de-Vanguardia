@@ -20,22 +20,23 @@ namespace Sis.Ges.Doc.Frontend
                 {
                     cn.Open();
 
-                    string sql = @"SELECT COUNT(*)
-                                   FROM Usuarios
-                                   WHERE Usuario = @Usuario
-                                   AND PasswordHash = @Password
-                                   AND Estado = 1";
+                    string sql = @"SELECT Rol
+                           FROM Usuarios
+                           WHERE Usuario = @Usuario
+                           AND PasswordHash = @Password
+                           AND Estado = 1";
 
                     SqlCommand cmd = new SqlCommand(sql, cn);
 
                     cmd.Parameters.AddWithValue("@Usuario", txtUser.Text.Trim());
                     cmd.Parameters.AddWithValue("@Password", txtPassword.Text.Trim());
 
-                    int existe = Convert.ToInt32(cmd.ExecuteScalar());
+                    object resultado = cmd.ExecuteScalar();
 
-                    if (existe > 0)
+                    if (resultado != null)
                     {
                         Session["Usuario"] = txtUser.Text.Trim();
+                        Session["Rol"] = resultado.ToString();
 
                         if (chkRememberMe.Checked)
                         {
@@ -54,7 +55,7 @@ namespace Sis.Ges.Doc.Frontend
             }
             catch (Exception ex)
             {
-                lblError.Text = "Error: " + ex.Message;
+                lblError.Text = ex.Message;
                 lblError.ForeColor = System.Drawing.Color.Red;
             }
         }

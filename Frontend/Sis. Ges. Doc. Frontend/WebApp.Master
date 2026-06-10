@@ -15,41 +15,23 @@
     <webopt:bundlereference runat="server" path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 
-    <%-- Bootstrap Icons CDN --%>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
     <link href="Styles/WebAppMaster.css" rel="stylesheet" />
 </head>
 <body>
     <form runat="server">
+
         <asp:ScriptManager runat="server">
-            <Scripts>
-                <%--Framework Scripts--%>
-                <asp:ScriptReference Name="MsAjaxBundle" />
-                <asp:ScriptReference Name="jquery" />
-                <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
-                <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
-                <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
-                <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
-                <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/Scripts/WebForms/DetailsView.js" />
-                <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
-                <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
-                <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
-                <asp:ScriptReference Name="WebFormsBundle" />
-            </Scripts>
         </asp:ScriptManager>
 
         <nav class="navbar global-navbar">
             <div class="container-fluid d-flex justify-content-between align-items-center">
 
-                <%-- Home icon on the left --%>
-              <a class="navbar-icon-link" runat="server" href="~/Dashboard.aspx" title="Home">
-    <i class="bi bi-house-fill"></i>
-</a>
+                <a class="navbar-icon-link" runat="server" href="~/Dashboard.aspx" title="Home">
+                    <i class="bi bi-house-fill"></i>
+                </a>
 
-                <%-- Empty middle space (flex handles this automatically) --%>
-
-                <%-- Person icon on the right --%>
-                <a class="navbar-icon-link" runat="server" href="~/Account" title="Account">
+               <a class="navbar-icon-link" runat="server" href="~/Perfil.aspx" title="Perfil">
                     <i class="bi bi-person-fill"></i>
                 </a>
 
@@ -60,9 +42,7 @@
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
         </div>
+
     </form>
-    <asp:PlaceHolder runat="server">
-        <%: Scripts.Render("~/Scripts/bootstrap.js") %>
-    </asp:PlaceHolder>
 </body>
 </html>
