@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Data.SqlClient;
+using Sis.Ges.Doc.Frontend.DAL;
 
 namespace Sis.Ges.Doc.Frontend
 {
@@ -12,22 +10,27 @@ namespace Sis.Ges.Doc.Frontend
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                try
+                {
+                    using (SqlConnection cn = Conexion.ObtenerConexion())
+                    {
+                        cn.Open();
+                        Response.Write("<script>alert('Conexión Exitosa a SQL Server');</script>");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Response.Write("<script>alert('Error: " + ex.Message.Replace("'", "") + "');</script>");
+                }
+            }
         }
 
         protected void btnLoginUser(object sender, EventArgs e)
         {
-            //Lógica para autenticar al usuario
-
-            if (chkRememberMe.Checked)
-            {
-                //Lógica para recordar al usuario mediante cookies
-            }
-
-
-            
-            Response.Redirect("Dashboard.aspx"); // Redirige al usuario a la página principal después de iniciar sesión
-
+            // Temporalmente dejamos el login como estaba
+            Response.Redirect("Dashboard.aspx");
         }
     }
 }
