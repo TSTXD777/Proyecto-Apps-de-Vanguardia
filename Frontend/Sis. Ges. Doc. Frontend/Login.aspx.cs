@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Data.SqlClient;
+using System.Web.UI;
 using Sis.Ges.Doc.Frontend.DAL;
 
 namespace Sis.Ges.Doc.Frontend
@@ -10,27 +9,54 @@ namespace Sis.Ges.Doc.Frontend
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-            {
-                try
-                {
-                    using (SqlConnection cn = Conexion.ObtenerConexion())
-                    {
-                        cn.Open();
-                        Response.Write("<script>alert('Conexión Exitosa a SQL Server');</script>");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Response.Write("<script>alert('Error: " + ex.Message.Replace("'", "") + "');</script>");
-                }
-            }
+
         }
 
         protected void btnLoginUser(object sender, EventArgs e)
         {
-            // Temporalmente dejamos el login como estaba
-            Response.Redirect("Dashboard.aspx");
+            try
+            {
+                using (SqlConnection cn = Conexion.ObtenerConexion())
+                {
+                    cn.Open();
+
+                    string sql = @"SELECT COUNT(*)
+                                   FROM Usuarios
+                                   WHERE Usuario = @Usuario
+                                   AND PasswordHash = @Password
+                                   AND Estado = 1";
+
+                    SqlCommand cmd = new SqlCommand(sql, cn);
+
+                    cmd.Parameters.AddWithValue("@Usuario", txtUser.Text.Trim());
+                    cmd.Parameters.AddWithValue("@Password", txtPassword.Text.Trim());
+
+                    int existe = Convert.ToInt32(cmd.ExecuteScalar());
+
+                    if (existe > 0)
+                    {
+                        Session["Usuario"] = txtUser.Text.Trim();
+
+                        if (chkRememberMe.Checked)
+                        {
+                            Response.Cookies["Usuario"].Value = txtUser.Text.Trim();
+                            Response.Cookies["Usuario"].Expires = DateTime.Now.AddDays(30);
+                        }
+
+                        Response.Redirect("Dashboard.aspx");
+                    }
+                    else
+                    {
+                        lblError.Text = "Usuario o contraseña incorrectos.";
+                        lblError.ForeColor = System.Drawing.Color.Red;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                lblError.Text = "Error: " + ex.Message;
+                lblError.ForeColor = System.Drawing.Color.Red;
+            }
         }
     }
 }
