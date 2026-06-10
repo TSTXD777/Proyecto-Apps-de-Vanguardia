@@ -33,15 +33,33 @@
             padding: 30px;
         }
 
-        .titulo {
-            text-align: center;
-            font-size: 36px;
-            margin-bottom: 30px;
-            color: #444;
+        .formulario {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
         }
 
-        .acciones {
-            margin-bottom: 20px;
+        .formulario h3 {
+            margin-top: 0;
+            color: #2e7d32;
+        }
+
+        .campo {
+            margin-bottom: 15px;
+        }
+
+        .campo label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .campo input,
+        .campo select {
+            width: 350px;
+            padding: 8px;
         }
 
         .btn {
@@ -55,6 +73,11 @@
 
         .btn:hover {
             background-color: #256428;
+        }
+
+        .mensaje {
+            margin-top: 10px;
+            font-weight: bold;
         }
 
         .grid {
@@ -76,7 +99,6 @@
             background-color: #fafafa;
         }
     </style>
-
 </head>
 <body>
 
@@ -90,17 +112,60 @@
 
     <div class="container">
 
-        <div class="acciones">
-            <asp:Button ID="btnNuevoUsuario"
+        <div class="formulario">
+
+            <h3>Crear Nuevo Usuario</h3>
+
+            <div class="campo">
+                <label>Nombre Completo</label>
+                <asp:TextBox ID="txtNombre" runat="server"></asp:TextBox>
+            </div>
+
+            <div class="campo">
+                <label>Correo</label>
+                <asp:TextBox ID="txtCorreo" runat="server"></asp:TextBox>
+            </div>
+
+            <div class="campo">
+                <label>Usuario</label>
+                <asp:TextBox ID="txtUsuario" runat="server"></asp:TextBox>
+            </div>
+
+            <div class="campo">
+                <label>Contraseña</label>
+                <asp:TextBox ID="txtPassword"
+                    runat="server"
+                    TextMode="Password"></asp:TextBox>
+            </div>
+
+            <div class="campo">
+                <label>Rol</label>
+                <asp:DropDownList ID="ddlRol" runat="server">
+                    <asp:ListItem Value="ADMIN">ADMIN</asp:ListItem>
+                    <asp:ListItem Value="USUARIO">USUARIO</asp:ListItem>
+                </asp:DropDownList>
+            </div>
+
+            <asp:Button ID="btnGuardarUsuario"
                 runat="server"
-                Text="+ Nuevo Usuario"
-                CssClass="btn" />
+                Text="Guardar Usuario"
+                CssClass="btn"
+                OnClick="btnGuardarUsuario_Click" />
+
+            <br /><br />
+
+            <asp:Label ID="lblMensaje"
+                runat="server"
+                CssClass="mensaje"></asp:Label>
+
         </div>
 
         <asp:GridView ID="gvUsuarios"
-            runat="server"
-            AutoGenerateColumns="False"
-            CssClass="grid">
+    runat="server"
+    AutoGenerateColumns="False"
+    CssClass="grid"
+    DataKeyNames="IdUsuario"
+    OnRowCommand="gvUsuarios_RowCommand">
 
             <Columns>
 
@@ -120,6 +185,12 @@
 
                 <asp:BoundField DataField="Estado"
                     HeaderText="Estado" />
+
+                <asp:ButtonField
+                    ButtonType="Button"
+                    CommandName="Editar"
+                    Text="Editar"
+                    HeaderText="Acciones" />
 
             </Columns>
 
