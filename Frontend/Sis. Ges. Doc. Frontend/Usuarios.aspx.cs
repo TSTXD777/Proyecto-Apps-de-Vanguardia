@@ -97,9 +97,42 @@ namespace Sis.Ges.Doc.Frontend
 
                         cmd.ExecuteNonQuery();
 
+                        SqlCommand bitacora = new SqlCommand(@"
+                        INSERT INTO Bitacora
+                        (
+                        IdDocumento,
+                        IdUsuario,
+                        Operacion,
+                        DatosAnteriores,
+                        DatosNuevos,
+                        DireccionIP,
+                        FechaOperacion
+                        )
+                        VALUES
+                        (
+                        NULL,
+                        1,
+                        'EDITAR',
+                        '',
+                        @Datos,
+                        @IP,
+                        GETDATE()
+                        )", cn);
+
+                        bitacora.Parameters.AddWithValue(
+                        "@Datos",
+                        txtUsuario.Text.Trim());
+
+                        bitacora.Parameters.AddWithValue(
+                        "@IP",
+                        Request.UserHostAddress);
+
+                        bitacora.ExecuteNonQuery();
+
                         ViewState["IdUsuarioEditar"] = null;
 
                         btnGuardarUsuario.Text = "Guardar Usuario";
+
 
                         lblMensaje.ForeColor = System.Drawing.Color.Green;
                         lblMensaje.Text = "Usuario actualizado correctamente.";
@@ -138,6 +171,38 @@ namespace Sis.Ges.Doc.Frontend
                         cmd.Parameters.AddWithValue("@Rol", ddlRol.SelectedValue);
 
                         cmd.ExecuteNonQuery();
+
+                         SqlCommand bitacora = new SqlCommand(@"
+                            INSERT INTO Bitacora
+                            (
+                                IdDocumento,
+                                IdUsuario,
+                                Operacion,
+                                DatosAnteriores,
+                                DatosNuevos,
+                                DireccionIP,
+                                FechaOperacion
+                            )
+                            VALUES
+                            (
+                                NULL,
+                                1,
+                                'CREAR',
+                                '',
+                                @Datos,
+                                @IP,
+                                GETDATE()
+                            )", cn);
+
+                        bitacora.Parameters.AddWithValue(
+                            "@Datos",
+                            txtUsuario.Text.Trim());
+
+                        bitacora.Parameters.AddWithValue(
+                            "@IP",
+                            Request.UserHostAddress);
+
+                        bitacora.ExecuteNonQuery();
 
                         lblMensaje.ForeColor = System.Drawing.Color.Green;
                         lblMensaje.Text = "Usuario creado correctamente.";

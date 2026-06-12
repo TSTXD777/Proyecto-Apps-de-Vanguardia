@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace Sis.Ges.Doc.Frontend
 {
@@ -11,7 +7,30 @@ namespace Sis.Ges.Doc.Frontend
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //cambio
+            if (Session["Usuario"] == null)
+            {
+                Response.Redirect("Login.aspx");
+                return;
+            }
+
+            if (!IsPostBack)
+            {
+                ddlUsuarios.Items.Clear();
+
+                ddlUsuarios.Items.Add("Todos");
+
+                if (Session["Usuario"] != null)
+                {
+                    ddlUsuarios.Items.Add(
+                        Session["Usuario"].ToString()
+                    );
+                }
+            }
+        }
+
+        protected void btnBuscar_Click(object sender, EventArgs e)
+        {
+            // Aquí irá el filtro cuando conectemos la BD
         }
     }
 }
