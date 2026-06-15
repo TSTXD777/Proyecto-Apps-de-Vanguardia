@@ -76,3 +76,4 @@ CodeCoverage/
 *.VisualState.xml
 TestResult.xml
 nunit-*.xml
+/Backend/Sis. Ges. Doc. Backend/Web.config
