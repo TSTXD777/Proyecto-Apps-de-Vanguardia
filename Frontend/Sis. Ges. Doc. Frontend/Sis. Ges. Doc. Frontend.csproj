@@ -102,6 +102,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\GestorDoc_Logo.png" />
+    <None Include="Connected Services\CategoryService\CategoryService.wsdl" />
     <None Include="Connected Services\DocService\DocService.disco" />
     <None Include="Connected Services\DocService\configuration91.svcinfo" />
     <None Include="Connected Services\DocService\configuration.svcinfo" />
@@ -113,6 +114,13 @@
     <None Include="Connected Services\UserService\configuration91.svcinfo" />
     <None Include="Connected Services\UserService\configuration.svcinfo" />
     <None Include="Connected Services\UserService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\CategoryService\CategoryService.disco" />
+    <None Include="Connected Services\CategoryService\configuration91.svcinfo" />
+    <None Include="Connected Services\CategoryService\configuration.svcinfo" />
+    <None Include="Connected Services\CategoryService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
@@ -215,6 +223,11 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Connected Services\CategoryService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\DocService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -333,6 +346,7 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\CategoryService\" />
     <WCFMetadataStorage Include="Connected Services\DocService\" />
     <WCFMetadataStorage Include="Connected Services\UserService\" />
   </ItemGroup>

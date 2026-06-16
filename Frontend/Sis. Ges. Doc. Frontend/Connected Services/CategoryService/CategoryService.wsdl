@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:tns="http://tempuri.org/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="InsertarCategoria">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="nombreCategoria" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="descripcion" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertarCategoriaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="InsertarCategoriaResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerCategorias">
+        <s:complexType />
+      </s:element>
+      <s:element name="ObtenerCategoriasResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObtenerCategoriasResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerCategoriaPorId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idCategoria" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerCategoriaPorIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObtenerCategoriaPorIdResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ActualizarCategoria">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idCategoria" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="nombreCategoria" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="descripcion" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ActualizarCategoriaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ActualizarCategoriaResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EliminarCategoria">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idCategoria" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EliminarCategoriaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EliminarCategoriaResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="InsertarCategoriaSoapIn">
+    <wsdl:part name="parameters" element="tns:InsertarCategoria" />
+  </wsdl:message>
+  <wsdl:message name="InsertarCategoriaSoapOut">
+    <wsdl:part name="parameters" element="tns:InsertarCategoriaResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerCategoriasSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenerCategorias" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerCategoriasSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenerCategoriasResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerCategoriaPorIdSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenerCategoriaPorId" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerCategoriaPorIdSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenerCategoriaPorIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="ActualizarCategoriaSoapIn">
+    <wsdl:part name="parameters" element="tns:ActualizarCategoria" />
+  </wsdl:message>
+  <wsdl:message name="ActualizarCategoriaSoapOut">
+    <wsdl:part name="parameters" element="tns:ActualizarCategoriaResponse" />
+  </wsdl:message>
+  <wsdl:message name="EliminarCategoriaSoapIn">
+    <wsdl:part name="parameters" element="tns:EliminarCategoria" />
+  </wsdl:message>
+  <wsdl:message name="EliminarCategoriaSoapOut">
+    <wsdl:part name="parameters" element="tns:EliminarCategoriaResponse" />
+  </wsdl:message>
+  <wsdl:portType name="CategoryServiceSoap">
+    <wsdl:operation name="InsertarCategoria">
+      <wsdl:input message="tns:InsertarCategoriaSoapIn" />
+      <wsdl:output message="tns:InsertarCategoriaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerCategorias">
+      <wsdl:input message="tns:ObtenerCategoriasSoapIn" />
+      <wsdl:output message="tns:ObtenerCategoriasSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerCategoriaPorId">
+      <wsdl:input message="tns:ObtenerCategoriaPorIdSoapIn" />
+      <wsdl:output message="tns:ObtenerCategoriaPorIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarCategoria">
+      <wsdl:input message="tns:ActualizarCategoriaSoapIn" />
+      <wsdl:output message="tns:ActualizarCategoriaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EliminarCategoria">
+      <wsdl:input message="tns:EliminarCategoriaSoapIn" />
+      <wsdl:output message="tns:EliminarCategoriaSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CategoryServiceSoap" type="tns:CategoryServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="InsertarCategoria">
+      <soap:operation soapAction="http://tempuri.org/InsertarCategoria" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerCategorias">
+      <soap:operation soapAction="http://tempuri.org/ObtenerCategorias" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerCategoriaPorId">
+      <soap:operation soapAction="http://tempuri.org/ObtenerCategoriaPorId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarCategoria">
+      <soap:operation soapAction="http://tempuri.org/ActualizarCategoria" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EliminarCategoria">
+      <soap:operation soapAction="http://tempuri.org/EliminarCategoria" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CategoryServiceSoap12" type="tns:CategoryServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="InsertarCategoria">
+      <soap12:operation soapAction="http://tempuri.org/InsertarCategoria" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerCategorias">
+      <soap12:operation soapAction="http://tempuri.org/ObtenerCategorias" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerCategoriaPorId">
+      <soap12:operation soapAction="http://tempuri.org/ObtenerCategoriaPorId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarCategoria">
+      <soap12:operation soapAction="http://tempuri.org/ActualizarCategoria" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EliminarCategoria">
+      <soap12:operation soapAction="http://tempuri.org/EliminarCategoria" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CategoryService">
+    <wsdl:port name="CategoryServiceSoap" binding="tns:CategoryServiceSoap">
+      <soap:address location="https://localhost:44331/CategoryService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="CategoryServiceSoap12" binding="tns:CategoryServiceSoap12">
+      <soap12:address location="https://localhost:44331/CategoryService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -23,7 +23,7 @@
 		- [ ] Fecha del Documento
 	- [ ] Botón para subir archivo
 	- [ ] Botón de Registrar
-		- [ ] Sube el archivo con {nombrearchivo_SHA256} a la carpeta ~/Docs 
+		- [ ] Sube el archivo con {nombrearchivo_SHA256} a la carpeta ~/Uploads
 		- [ ] Sube la info a la BD
 - [ ] Consultar Docs
 	- [ ] Barra de búsqueda
@@ -82,16 +82,16 @@
 # Backend
 
 - [ ] Documentos
-	- [ ] CRUD de la Tabla 'Documentos' en la BD usando Procedimientos Almacenados
-	- [ ] Handlers
-		- [ ] Subir archivo
-		- [ ] Descargar Archivo
+	- [x] CRUD de la Tabla 'Documentos' en la BD usando Procedimientos Almacenados
+	- [x] Handlers
+		- [x] Subir archivo
+		- [x] Descargar Archivo
 	- [ ] Generación de metadata en SHA256
 - [ ] Usuarios
 	- [ ] CRUD de la Tabla 'Usuarios' en la BD usando Procedimientos Almacenados
 	- [ ] Encripción de Contraseñas usando SHA256
 - [ ] Categorías
-    - [ ] CRUD de la Tabla 'Categorias' en la BD usando Procedimientos Almacenados
+    - [x] CRUD de la Tabla 'Categorias' en la BD usando Procedimientos Almacenados
 - [ ] Departamentos
     - [ ] CRUD de la Tabla 'Departamentos' en la BD usando Procedimientos Almacenados
 - [ ] Bitácora automática usando Triggers

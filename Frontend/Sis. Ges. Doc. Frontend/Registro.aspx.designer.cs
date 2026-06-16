@@ -78,13 +78,13 @@ namespace Sis.Ges.Doc.Frontend
         protected global::System.Web.UI.WebControls.Label lblCategoria;
 
         /// <summary>
-        /// txtCategoria control.
+        /// ddlCategoria control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCategoria;
+        protected global::System.Web.UI.WebControls.DropDownList ddlCategoria;
 
         /// <summary>
         /// lblFecha control.

@@ -1,4 +1,6 @@
 <Solution>
   <Project Path="../Backend/Sis. Ges. Doc. Backend/Sis. Ges. Doc. Backend.csproj" Id="12f7647f-7eb2-4908-9162-29a5aefa626f" />
-  <Project Path="Sis. Ges. Doc. Frontend/Sis. Ges. Doc. Frontend.csproj" Id="631d922f-ea2b-4c51-b2af-c44bc0a1405c" />
+  <Project Path="Sis. Ges. Doc. Frontend/Sis. Ges. Doc. Frontend.csproj" Id="631d922f-ea2b-4c51-b2af-c44bc0a1405c">
+    <BuildDependency Project="../Backend/Sis. Ges. Doc. Backend/Sis. Ges. Doc. Backend.csproj" />
+  </Project>
 </Solution>

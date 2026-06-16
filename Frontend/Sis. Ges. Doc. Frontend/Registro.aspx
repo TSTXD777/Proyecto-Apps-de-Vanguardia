@@ -58,9 +58,8 @@
                     <asp:Label ID="lblDescripcion" runat="server" AssociatedControlID="txtDescripcion" Text="Descripción" />
                     <asp:TextBox ID="txtDescripcion" runat="server" TextMode="MultiLine" Rows="6" CssClass="textarea" />
 
-                    <asp:Label ID="lblCategoria" runat="server" AssociatedControlID="txtCategoria" Text="Categoria" />
-                    <asp:TextBox ID="txtCategoria" runat="server" CssClass="input" />
-
+                    <asp:Label ID="lblCategoria" runat="server" AssociatedControlID="ddlCategoria" Text="Categoria" />
+                    <asp:DropDownList ID="ddlCategoria" runat="server" CssClass="input" />
                     <asp:Label ID="lblFecha" runat="server" AssociatedControlID="txtFecha" Text="Fecha Doc" />
                     <input id="txtFecha" type="date" runat="server" class="date" />
 
@@ -85,7 +84,7 @@
                     '<%= fileUpload.ClientID %>',
                     '<%= txtNombre.ClientID %>',
                     '<%= txtDescripcion.ClientID %>',
-                    '<%= txtCategoria.ClientID %>',
+                    '<%= ddlCategoria.ClientID %>',
                     '<%= txtFecha.ClientID %>',
                     '<%= btnRegistrar.ClientID %>',
                     'uploadStatus'
