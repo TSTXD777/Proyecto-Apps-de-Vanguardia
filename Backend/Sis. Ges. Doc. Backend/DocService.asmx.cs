@@ -17,7 +17,7 @@ namespace Sis.Ges.Doc.Backend
     [System.ComponentModel.ToolboxItem(false)]
     // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
     // [System.Web.Script.Services.ScriptService]
-    public class WebService1 : System.Web.Services.WebService
+    public class DocService : System.Web.Services.WebService
     {
 
         [WebMethod]
@@ -79,18 +79,27 @@ namespace Sis.Ges.Doc.Backend
             return resultado;
         }
 
-        // SELECT (todos)
+        // SELECT
         [WebMethod]
         public DataSet ObtenerDocumentos()
         {
             DataSet ds = new DataSet();
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            try
             {
-                SqlCommand cmd = new SqlCommand("sp_ObtenerDocumentos", conn);
-                cmd.CommandType = CommandType.StoredProcedure;
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    SqlCommand cmd = new SqlCommand("sp_ObtenerDocumentos", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
 
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                da.Fill(ds);
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    da.Fill(ds);
+                }
+            }
+            catch (SqlException ex)
+            {
+                // Log error (e.g., to file, DB, or monitoring system)
+                // Optionally rethrow or wrap in a custom exception
+                throw new Exception("Error retrieving documents.", ex);
             }
             return ds;
         }
@@ -100,17 +109,25 @@ namespace Sis.Ges.Doc.Backend
         public DataSet ObtenerDocumentoPorId(int idDocumento)
         {
             DataSet ds = new DataSet();
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            try
             {
-                SqlCommand cmd = new SqlCommand("sp_ObtenerDocumentoPorId", conn);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@IdDocumento", idDocumento);
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    SqlCommand cmd = new SqlCommand("sp_ObtenerDocumentoPorId", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@IdDocumento", idDocumento);
 
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                da.Fill(ds);
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    da.Fill(ds);
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw new Exception($"Error retrieving document with ID {idDocumento}.", ex);
             }
             return ds;
         }
+
 
         // UPDATE
         [WebMethod]

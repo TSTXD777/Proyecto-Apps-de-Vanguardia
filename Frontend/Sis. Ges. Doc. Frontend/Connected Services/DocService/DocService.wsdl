@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:tns="http://tempuri.org/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="InsertarDocumento">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="nombreDocumento" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="descripcion" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="idCategoria" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="idUsuarioResponsable" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertarDocumentoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="InsertarDocumentoResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerDocumentos">
+        <s:complexType />
+      </s:element>
+      <s:element name="ObtenerDocumentosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObtenerDocumentosResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerDocumentoPorId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idDocumento" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerDocumentoPorIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObtenerDocumentoPorIdResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ActualizarDocumento">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idDocumento" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="nombreDocumento" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="descripcion" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="idCategoria" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="idUsuarioResponsable" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="idUsuarioModificacion" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ActualizarDocumentoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ActualizarDocumentoResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EliminarDocumento">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idDocumento" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="idUsuarioModificacion" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EliminarDocumentoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EliminarDocumentoResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="InsertarDocumentoSoapIn">
+    <wsdl:part name="parameters" element="tns:InsertarDocumento" />
+  </wsdl:message>
+  <wsdl:message name="InsertarDocumentoSoapOut">
+    <wsdl:part name="parameters" element="tns:InsertarDocumentoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerDocumentosSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenerDocumentos" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerDocumentosSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenerDocumentosResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerDocumentoPorIdSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenerDocumentoPorId" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerDocumentoPorIdSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenerDocumentoPorIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="ActualizarDocumentoSoapIn">
+    <wsdl:part name="parameters" element="tns:ActualizarDocumento" />
+  </wsdl:message>
+  <wsdl:message name="ActualizarDocumentoSoapOut">
+    <wsdl:part name="parameters" element="tns:ActualizarDocumentoResponse" />
+  </wsdl:message>
+  <wsdl:message name="EliminarDocumentoSoapIn">
+    <wsdl:part name="parameters" element="tns:EliminarDocumento" />
+  </wsdl:message>
+  <wsdl:message name="EliminarDocumentoSoapOut">
+    <wsdl:part name="parameters" element="tns:EliminarDocumentoResponse" />
+  </wsdl:message>
+  <wsdl:portType name="DocServiceSoap">
+    <wsdl:operation name="InsertarDocumento">
+      <wsdl:input message="tns:InsertarDocumentoSoapIn" />
+      <wsdl:output message="tns:InsertarDocumentoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerDocumentos">
+      <wsdl:input message="tns:ObtenerDocumentosSoapIn" />
+      <wsdl:output message="tns:ObtenerDocumentosSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerDocumentoPorId">
+      <wsdl:input message="tns:ObtenerDocumentoPorIdSoapIn" />
+      <wsdl:output message="tns:ObtenerDocumentoPorIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarDocumento">
+      <wsdl:input message="tns:ActualizarDocumentoSoapIn" />
+      <wsdl:output message="tns:ActualizarDocumentoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EliminarDocumento">
+      <wsdl:input message="tns:EliminarDocumentoSoapIn" />
+      <wsdl:output message="tns:EliminarDocumentoSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="DocServiceSoap" type="tns:DocServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="InsertarDocumento">
+      <soap:operation soapAction="http://tempuri.org/InsertarDocumento" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerDocumentos">
+      <soap:operation soapAction="http://tempuri.org/ObtenerDocumentos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerDocumentoPorId">
+      <soap:operation soapAction="http://tempuri.org/ObtenerDocumentoPorId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarDocumento">
+      <soap:operation soapAction="http://tempuri.org/ActualizarDocumento" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EliminarDocumento">
+      <soap:operation soapAction="http://tempuri.org/EliminarDocumento" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="DocServiceSoap12" type="tns:DocServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="InsertarDocumento">
+      <soap12:operation soapAction="http://tempuri.org/InsertarDocumento" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerDocumentos">
+      <soap12:operation soapAction="http://tempuri.org/ObtenerDocumentos" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerDocumentoPorId">
+      <soap12:operation soapAction="http://tempuri.org/ObtenerDocumentoPorId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarDocumento">
+      <soap12:operation soapAction="http://tempuri.org/ActualizarDocumento" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EliminarDocumento">
+      <soap12:operation soapAction="http://tempuri.org/EliminarDocumento" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="DocService">
+    <wsdl:port name="DocServiceSoap" binding="tns:DocServiceSoap">
+      <soap:address location="https://localhost:44331/DocService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="DocServiceSoap12" binding="tns:DocServiceSoap12">
+      <soap12:address location="https://localhost:44331/DocService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
