@@ -47,6 +47,7 @@
                             </div>
                         </div>
                         <div class="hint">Seleccionar Docs</div>
+                        <div id="uploadStatus" style="font-size:13px;color:#2b7a2b;margin-top:6px;"></div>
                     </div>
                 </div>
 
@@ -63,10 +64,34 @@
                     <asp:Label ID="lblFecha" runat="server" AssociatedControlID="txtFecha" Text="Fecha Doc" />
                     <input id="txtFecha" type="date" runat="server" class="date" />
 
-                    <asp:Button ID="btnRegistrar" runat="server" Text="Registrar" CssClass="btn" OnClick="btnRegistrar_Click" />
+                    <asp:Button ID="btnRegistrar" runat="server" Text="Registrar" CssClass="btn" OnClick="btnRegistrar_Click" OnClientClick="return onRegistrarClick();" />
                 </div>
             </div>
         </div>
+        <script src="Scripts/scriptsRegistro.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            // All functionality is implemented in Scripts/scriptsRegistro.js
+            if (window.setupUpload) {
+                window.setupUpload(
+                    '<%= fileUpload.ClientID %>',
+                    'uploadStatus',
+                    '<%= ResolveUrl("~/UploadHandler.ashx") %>',
+                    '<%= btnRegistrar.UniqueID %>',
+                    '<%= btnRegistrar.ClientID %>'
+                );
+            }
+            if (window.setupValidation) {
+                window.setupValidation(
+                    '<%= fileUpload.ClientID %>',
+                    '<%= txtNombre.ClientID %>',
+                    '<%= txtDescripcion.ClientID %>',
+                    '<%= txtCategoria.ClientID %>',
+                    '<%= txtFecha.ClientID %>',
+                    '<%= btnRegistrar.ClientID %>',
+                    'uploadStatus'
+                );
+            }
+        </script>
     </form>
 </body>
 </html>

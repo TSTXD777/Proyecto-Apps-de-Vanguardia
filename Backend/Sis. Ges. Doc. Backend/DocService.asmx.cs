@@ -6,6 +6,8 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Services;
+using System.IO;
+using System.Security.Cryptography;
 
 namespace Sis.Ges.Doc.Backend
 {
@@ -21,19 +23,20 @@ namespace Sis.Ges.Doc.Backend
     {
 
         [WebMethod]
-        public static void UploadHandler()
+        public static string MetadataGeneration(string filePath)
         {
-            
-        }
+            if (string.IsNullOrEmpty(filePath))
+                throw new ArgumentException("filePath must be provided.", nameof(filePath));
 
-        public static void DownloadHandler()
-        {
+            if (!File.Exists(filePath))
+                throw new FileNotFoundException("File not found.", filePath);
 
-        }
-
-        public static void MetadataGeneration()
-        {
-
+            using (SHA256 sha256 = SHA256.Create())
+            using (FileStream stream = File.OpenRead(filePath))
+            {
+                byte[] hash = sha256.ComputeHash(stream);
+                return BitConverter.ToString(hash).Replace("-", "").ToLowerInvariant();
+            }
         }
 
         // ========== CRUD de la BD ==========
@@ -42,38 +45,44 @@ namespace Sis.Ges.Doc.Backend
 
         // INSERT
         [WebMethod]
-        public string InsertarDocumento(string nombreDocumento, string descripcion, int idCategoria, int idUsuarioResponsable)
+        public string InsertarDocumento(string filePath, string nombreDocumento, string descripcion, int idCategoria, int idUsuarioResponsable)
         {
             string resultado = "";
-            
 
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            try
             {
-                try
+                // Compute SHA256 hash and file naming
+                string fileNameOriginal = Path.GetFileName(filePath);
+                string sha256Hash = MetadataGeneration(filePath);
+                string baseName = Path.GetFileNameWithoutExtension(fileNameOriginal);
+                string extension = Path.GetExtension(fileNameOriginal);
+                string nombreArchivoHash = string.Format("{0}_{1}{2}", baseName, sha256Hash, extension);
+                string rutaArchivo = "/Uploads/" + nombreArchivoHash;
+
+                using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
                     SqlCommand cmd = new SqlCommand("sp_InsertarDocumento", conn);
                     cmd.CommandType = CommandType.StoredProcedure;
-                    // TODO: Reemplazar valores de ejemplo por datos reales del documento a insertar
                     // Parámetros
                     cmd.Parameters.AddWithValue("@NombreDocumento", nombreDocumento);
                     cmd.Parameters.AddWithValue("@Descripcion", descripcion);
                     cmd.Parameters.AddWithValue("@IdCategoria", idCategoria);
                     cmd.Parameters.AddWithValue("@IdUsuarioResponsable", idUsuarioResponsable);
-                    cmd.Parameters.AddWithValue("@NombreArchivoOriginal", "archivo.pdf");
-                    cmd.Parameters.AddWithValue("@NombreArchivoHash", "hash123");
-                    cmd.Parameters.AddWithValue("@RutaArchivo", @"C:\Docs\archivo.pdf");
-                    cmd.Parameters.AddWithValue("@HashDocumento", "XYZ987");
+                    cmd.Parameters.AddWithValue("@NombreArchivoOriginal", fileNameOriginal);
+                    cmd.Parameters.AddWithValue("@NombreArchivoHash", nombreArchivoHash);
+                    cmd.Parameters.AddWithValue("@RutaArchivo", rutaArchivo);
+                    cmd.Parameters.AddWithValue("@HashDocumento", sha256Hash);
                     cmd.Parameters.AddWithValue("@FechaDocumento", DateTime.Now);
                     cmd.Parameters.AddWithValue("@IdUsuarioModificacion", idUsuarioResponsable);
 
                     cmd.ExecuteNonQuery();
                     resultado = "Documento insertado correctamente.";
                 }
-                catch (Exception ex)
-                {
-                    resultado = "Error: " + ex.Message;
-                }
+            }
+            catch (Exception ex)
+            {
+                resultado = "Error: " + ex.Message;
             }
 
             return resultado;
