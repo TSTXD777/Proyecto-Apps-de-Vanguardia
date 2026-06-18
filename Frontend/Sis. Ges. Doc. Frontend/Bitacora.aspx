@@ -167,6 +167,10 @@
                     HeaderText="Operación" />
 
                 <asp:BoundField
+                    DataField="DatosNuevos"
+                    HeaderText="Detalle" />
+
+                <asp:BoundField
                     DataField="FechaOperacion"
                     HeaderText="Fecha y Hora" />
 

@@ -62,7 +62,28 @@ namespace Sis.Ges.Doc.Frontend
                 WHEN B.Operacion = 'EDITAR' THEN 'Editó usuario'
                 ELSE B.Operacion
             END AS Operacion,
-            DATEADD(HOUR, -8, B.FechaOperacion) AS FechaOperacion
+
+CASE
+    WHEN B.Operacion IN ('INSERT','UPDATE')
+    THEN LEFT(
+        SUBSTRING(
+            B.DatosNuevos,
+            CHARINDEX('NombreDocumento=', B.DatosNuevos) + 16,
+            200
+        ),
+        CHARINDEX(
+            ';',
+            SUBSTRING(
+                B.DatosNuevos,
+                CHARINDEX('NombreDocumento=', B.DatosNuevos) + 16,
+                200
+            ) + ';'
+        ) - 1
+    )
+    ELSE B.DatosNuevos
+END AS DatosNuevos,
+
+DATEADD(HOUR, -8, B.FechaOperacion) AS FechaOperacion
         FROM Bitacora B
         INNER JOIN Usuarios U
             ON B.IdUsuario = U.IdUsuario
@@ -95,7 +116,28 @@ namespace Sis.Ges.Doc.Frontend
                 WHEN B.Operacion = 'EDITAR' THEN 'Editó usuario'
                 ELSE B.Operacion
             END AS Operacion,
-            DATEADD(HOUR, -8, B.FechaOperacion) AS FechaOperacion
+
+CASE
+    WHEN B.Operacion IN ('INSERT','UPDATE')
+    THEN LEFT(
+        SUBSTRING(
+            B.DatosNuevos,
+            CHARINDEX('NombreDocumento=', B.DatosNuevos) + 16,
+            200
+        ),
+        CHARINDEX(
+            ';',
+            SUBSTRING(
+                B.DatosNuevos,
+                CHARINDEX('NombreDocumento=', B.DatosNuevos) + 16,
+                200
+            ) + ';'
+        ) - 1
+    )
+    ELSE B.DatosNuevos
+END AS DatosNuevos,
+
+DATEADD(HOUR, -8, B.FechaOperacion) AS FechaOperacion
         FROM Bitacora B
         INNER JOIN Usuarios U
             ON B.IdUsuario = U.IdUsuario
