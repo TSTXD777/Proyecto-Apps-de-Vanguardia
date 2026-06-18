@@ -22,7 +22,9 @@ namespace Sis.Ges.Doc.Frontend
                 if (Session["Usuario"] != null)
                 {
                     ddlUsuarios.Items.Add(
-                        Session["Usuario"].ToString()
+                        Session["NombreUsuario"] != null
+                            ? Session["NombreUsuario"].ToString()
+                            : Session["Usuario"].ToString()
                     );
                 }
             }

@@ -140,7 +140,7 @@ namespace Sis.Ges.Doc.Backend
 
         // UPDATE
         [WebMethod]
-        public string ActualizarDocumento(int idDocumento, string nombreDocumento, string descripcion, int idCategoria, int idUsuarioResponsable, int idUsuarioModificacion)
+        public string ActualizarDocumento(int idDocumento, string nombreDocumento, string descripcion, int idCategoria, DateTime fechaRegistro, int idUsuarioResponsable, int idUsuarioModificacion)
         {
             string resultado = "";
             using (SqlConnection conn = new SqlConnection(connectionString))
@@ -148,13 +148,24 @@ namespace Sis.Ges.Doc.Backend
                 try
                 {
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand("sp_ActualizarDocumento", conn);
-                    cmd.CommandType = CommandType.StoredProcedure;
+                    SqlCommand cmd = new SqlCommand(@"
+                        UPDATE Documentos
+                        SET
+                            NombreDocumento = @NombreDocumento,
+                            Descripcion = @Descripcion,
+                            IdCategoria = @IdCategoria,
+                            FechaRegistro = @FechaRegistro,
+                            FechaUltimaModificacion = @FechaUltimaModificacion,
+                            IdUsuarioResponsable = @IdUsuarioResponsable,
+                            IdUsuarioModificacion = @IdUsuarioModificacion
+                        WHERE IdDocumento = @IdDocumento", conn);
 
                     cmd.Parameters.AddWithValue("@IdDocumento", idDocumento);
                     cmd.Parameters.AddWithValue("@NombreDocumento", nombreDocumento);
                     cmd.Parameters.AddWithValue("@Descripcion", descripcion);
                     cmd.Parameters.AddWithValue("@IdCategoria", idCategoria);
+                    cmd.Parameters.AddWithValue("@FechaRegistro", fechaRegistro);
+                    cmd.Parameters.AddWithValue("@FechaUltimaModificacion", DateTime.Now);
                     cmd.Parameters.AddWithValue("@IdUsuarioResponsable", idUsuarioResponsable);
                     cmd.Parameters.AddWithValue("@IdUsuarioModificacion", idUsuarioModificacion);
 

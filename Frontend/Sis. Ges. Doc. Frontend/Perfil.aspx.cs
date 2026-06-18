@@ -15,7 +15,9 @@ namespace Sis.Ges.Doc.Frontend
 
             if (!IsPostBack)
             {
-                lblUsuario.Text = Session["Usuario"].ToString();
+                lblUsuario.Text = Session["NombreUsuario"] != null
+                    ? Session["NombreUsuario"].ToString()
+                    : Session["Usuario"].ToString();
 
                 if (Session["Rol"] != null)
                 {

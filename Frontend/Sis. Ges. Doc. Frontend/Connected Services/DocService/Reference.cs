@@ -39,10 +39,10 @@ namespace Sis.Ges.Doc.Frontend.DocService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ActualizarDocumento", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        string ActualizarDocumento(int idDocumento, string nombreDocumento, string descripcion, int idCategoria, int idUsuarioResponsable, int idUsuarioModificacion);
+        string ActualizarDocumento(int idDocumento, string nombreDocumento, string descripcion, int idCategoria, System.DateTime fechaRegistro, int idUsuarioResponsable, int idUsuarioModificacion);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ActualizarDocumento", ReplyAction="*")]
-        System.Threading.Tasks.Task<string> ActualizarDocumentoAsync(int idDocumento, string nombreDocumento, string descripcion, int idCategoria, int idUsuarioResponsable, int idUsuarioModificacion);
+        System.Threading.Tasks.Task<string> ActualizarDocumentoAsync(int idDocumento, string nombreDocumento, string descripcion, int idCategoria, System.DateTime fechaRegistro, int idUsuarioResponsable, int idUsuarioModificacion);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/EliminarDocumento", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -103,12 +103,12 @@ namespace Sis.Ges.Doc.Frontend.DocService {
             return base.Channel.ObtenerDocumentoPorIdAsync(idDocumento);
         }
         
-        public string ActualizarDocumento(int idDocumento, string nombreDocumento, string descripcion, int idCategoria, int idUsuarioResponsable, int idUsuarioModificacion) {
-            return base.Channel.ActualizarDocumento(idDocumento, nombreDocumento, descripcion, idCategoria, idUsuarioResponsable, idUsuarioModificacion);
+        public string ActualizarDocumento(int idDocumento, string nombreDocumento, string descripcion, int idCategoria, System.DateTime fechaRegistro, int idUsuarioResponsable, int idUsuarioModificacion) {
+            return base.Channel.ActualizarDocumento(idDocumento, nombreDocumento, descripcion, idCategoria, fechaRegistro, idUsuarioResponsable, idUsuarioModificacion);
         }
         
-        public System.Threading.Tasks.Task<string> ActualizarDocumentoAsync(int idDocumento, string nombreDocumento, string descripcion, int idCategoria, int idUsuarioResponsable, int idUsuarioModificacion) {
-            return base.Channel.ActualizarDocumentoAsync(idDocumento, nombreDocumento, descripcion, idCategoria, idUsuarioResponsable, idUsuarioModificacion);
+        public System.Threading.Tasks.Task<string> ActualizarDocumentoAsync(int idDocumento, string nombreDocumento, string descripcion, int idCategoria, System.DateTime fechaRegistro, int idUsuarioResponsable, int idUsuarioModificacion) {
+            return base.Channel.ActualizarDocumentoAsync(idDocumento, nombreDocumento, descripcion, idCategoria, fechaRegistro, idUsuarioResponsable, idUsuarioModificacion);
         }
         
         public string EliminarDocumento(int idDocumento, int idUsuarioModificacion) {

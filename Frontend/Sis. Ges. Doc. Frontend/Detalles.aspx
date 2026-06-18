@@ -183,6 +183,70 @@
         .icon-download {
             margin-right: 8px;
         }
+
+        .modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.45);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            z-index: 1000;
+        }
+
+        .editor-modal {
+            width: min(560px, 100%);
+            background: white;
+            border: 2px solid #777;
+            padding: 24px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .editor-modal h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            font-weight: 400;
+        }
+
+        .editor-field {
+            margin-bottom: 16px;
+        }
+
+        .editor-field label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .editor-field input,
+        .editor-field textarea,
+        .editor-field select {
+            width: 100%;
+            padding: 9px;
+            border: 1px solid #999;
+            font: inherit;
+        }
+
+        .editor-field textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+            margin-top: 22px;
+        }
+
+        .modal-message {
+            display: block;
+            margin-top: 12px;
+            color: #8a1f11;
+            font-size: 14px;
+        }
     </style>
 </head>
 <body>
@@ -256,7 +320,7 @@
                         </div>
 
                         <div class="button-group">
-                            <asp:Button ID="btnEditor" runat="server" Text="✎ Editor" CssClass="btn btn-editor" />
+                            <asp:Button ID="btnEditor" runat="server" Text="✎ Editor" CssClass="btn btn-editor" OnClick="btnEditor_Click" />
                             <asp:Button ID="btnDescargar" runat="server" Text="⬇ Descargar" CssClass="btn btn-descargar" OnClick="btnDescargar_Click" />
                         </div>
                     </asp:Panel>
@@ -266,6 +330,39 @@
                 <div class="scrollbar-decoration"></div>
             </div>
         </div>
+
+        <asp:Panel ID="pnlEditorModal" runat="server" CssClass="modal-backdrop" Visible="false">
+            <div class="editor-modal">
+                <h2>Editar documento</h2>
+
+                <div class="editor-field">
+                    <label for="<%= txtEditNombre.ClientID %>">Nombre del Documento</label>
+                    <asp:TextBox ID="txtEditNombre" runat="server"></asp:TextBox>
+                </div>
+
+                <div class="editor-field">
+                    <label for="<%= txtEditDescripcion.ClientID %>">Descripción</label>
+                    <asp:TextBox ID="txtEditDescripcion" runat="server" TextMode="MultiLine"></asp:TextBox>
+                </div>
+
+                <div class="editor-field">
+                    <label for="<%= ddlEditCategoria.ClientID %>">Categoría</label>
+                    <asp:DropDownList ID="ddlEditCategoria" runat="server"></asp:DropDownList>
+                </div>
+
+                <div class="editor-field">
+                    <label for="<%= txtEditFechaRegistro.ClientID %>">Fecha de Registro</label>
+                    <asp:TextBox ID="txtEditFechaRegistro" runat="server" TextMode="Date"></asp:TextBox>
+                </div>
+
+                <asp:Label ID="lblEditorMensaje" runat="server" CssClass="modal-message"></asp:Label>
+
+                <div class="modal-actions">
+                    <asp:Button ID="btnCancelarEdicion" runat="server" Text="Cancelar" CssClass="btn" CausesValidation="false" OnClick="btnCancelarEdicion_Click" />
+                    <asp:Button ID="btnGuardarEdicion" runat="server" Text="Guardar" CssClass="btn" OnClick="btnGuardarEdicion_Click" />
+                </div>
+            </div>
+        </asp:Panel>
     </form>
 </body>
 </html>

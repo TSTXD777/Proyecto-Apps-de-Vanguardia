@@ -6,6 +6,9 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Services;
+using System.Security.Cryptography;
+using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Sis.Ges.Doc.Backend
 {
@@ -30,6 +33,27 @@ namespace Sis.Ges.Doc.Backend
 
         private string connectionString = ConfigurationManager.ConnectionStrings["DBVanguardia"].ConnectionString;
 
+        private static string EnsureSha256Hash(string value)
+        {
+            if (!string.IsNullOrWhiteSpace(value) && Regex.IsMatch(value, "^[a-fA-F0-9]{64}$"))
+            {
+                return value.ToLowerInvariant();
+            }
+
+            using (SHA256 sha256 = SHA256.Create())
+            {
+                byte[] bytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(value ?? string.Empty));
+                StringBuilder builder = new StringBuilder(bytes.Length * 2);
+
+                foreach (byte item in bytes)
+                {
+                    builder.Append(item.ToString("x2"));
+                }
+
+                return builder.ToString();
+            }
+        }
+
         // INSERT
         [WebMethod]
         public string InsertarUsuario(string nombreCompleto, string correo, string usuario, string passwordHash, int idDepartamento, string rol)
@@ -45,7 +69,7 @@ namespace Sis.Ges.Doc.Backend
                     cmd.Parameters.AddWithValue("@NombreCompleto", nombreCompleto);
                     cmd.Parameters.AddWithValue("@Correo", correo);
                     cmd.Parameters.AddWithValue("@Usuario", usuario);
-                    cmd.Parameters.AddWithValue("@PasswordHash", passwordHash);
+                    cmd.Parameters.AddWithValue("@PasswordHash", EnsureSha256Hash(passwordHash));
                     cmd.Parameters.AddWithValue("@IdDepartamento", idDepartamento);
                     cmd.Parameters.AddWithValue("@Rol", rol);
 
@@ -154,7 +178,7 @@ namespace Sis.Ges.Doc.Backend
                     cmd.Parameters.AddWithValue("@NombreCompleto", nombreCompleto);
                     cmd.Parameters.AddWithValue("@Correo", correo);
                     cmd.Parameters.AddWithValue("@Usuario", usuario);
-                    cmd.Parameters.AddWithValue("@PasswordHash", passwordHash);
+                    cmd.Parameters.AddWithValue("@PasswordHash", EnsureSha256Hash(passwordHash));
                     cmd.Parameters.AddWithValue("@IdDepartamento", idDepartamento);
                     cmd.Parameters.AddWithValue("@Rol", rol);
 

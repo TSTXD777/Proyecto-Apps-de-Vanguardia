@@ -20,7 +20,7 @@ namespace Sis.Ges.Doc.Frontend
                 {
                     cn.Open();
 
-                    string sql = @"SELECT Rol
+                    string sql = @"SELECT IdUsuario, Rol
                            FROM Usuarios
                            WHERE Usuario = @Usuario
                            AND PasswordHash = @Password
@@ -29,14 +29,15 @@ namespace Sis.Ges.Doc.Frontend
                     SqlCommand cmd = new SqlCommand(sql, cn);
 
                     cmd.Parameters.AddWithValue("@Usuario", txtUser.Text.Trim());
-                    cmd.Parameters.AddWithValue("@Password", txtPassword.Text.Trim());
+                    cmd.Parameters.AddWithValue("@Password", SecurityHelper.Sha256Hash(txtPassword.Text));
 
-                    object resultado = cmd.ExecuteScalar();
+                    SqlDataReader dr = cmd.ExecuteReader();
 
-                    if (resultado != null)
+                    if (dr.Read())
                     {
-                        Session["Usuario"] = txtUser.Text.Trim();
-                        Session["Rol"] = resultado.ToString();
+                        Session["Usuario"] = Convert.ToInt32(dr["IdUsuario"]);
+                        Session["NombreUsuario"] = txtUser.Text.Trim();
+                        Session["Rol"] = dr["Rol"].ToString();
 
                         if (chkRememberMe.Checked)
                         {
@@ -44,7 +45,9 @@ namespace Sis.Ges.Doc.Frontend
                             Response.Cookies["Usuario"].Expires = DateTime.Now.AddDays(30);
                         }
 
-                        Response.Redirect("Dashboard.aspx");
+                        Response.Redirect("Dashboard.aspx", false);
+                        Context.ApplicationInstance.CompleteRequest();
+                        return;
                     }
                     else
                     {

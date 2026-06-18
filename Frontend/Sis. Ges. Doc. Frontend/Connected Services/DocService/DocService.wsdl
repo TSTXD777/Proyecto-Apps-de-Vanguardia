@@ -66,6 +66,7 @@
             <s:element minOccurs="0" maxOccurs="1" name="nombreDocumento" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="descripcion" type="s:string" />
             <s:element minOccurs="1" maxOccurs="1" name="idCategoria" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="fechaRegistro" type="s:dateTime" />
             <s:element minOccurs="1" maxOccurs="1" name="idUsuarioResponsable" type="s:int" />
             <s:element minOccurs="1" maxOccurs="1" name="idUsuarioModificacion" type="s:int" />
           </s:sequence>

@@ -11,6 +11,12 @@ namespace Sis.Ges.Doc.Frontend
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["Usuario"] == null)
+            {
+                Response.Redirect("Login.aspx");
+                return;
+            }
+
             if (!IsPostBack)
             {
                 CargarDocumento();
@@ -35,6 +41,78 @@ namespace Sis.Ges.Doc.Frontend
 
             Response.Redirect("DownloadHandler.ashx?file=" + Server.UrlEncode(nombreArchivo), false);
             Context.ApplicationInstance.CompleteRequest();
+        }
+
+        protected void btnEditor_Click(object sender, EventArgs e)
+        {
+            if (!UsuarioPuedeEditar())
+            {
+                btnEditor.Visible = false;
+                return;
+            }
+
+            CargarCategoriasEditor();
+            txtEditNombre.Text = ViewState["NombreDocumento"] as string ?? string.Empty;
+            txtEditDescripcion.Text = ViewState["Descripcion"] as string ?? string.Empty;
+            SeleccionarCategoriaEditor(ConvertirEntero(ViewState["IdCategoria"]));
+
+            DateTime? fechaRegistro = ConvertirFecha(ViewState["FechaRegistro"]);
+            txtEditFechaRegistro.Text = fechaRegistro.HasValue ? fechaRegistro.Value.ToString("yyyy-MM-dd") : string.Empty;
+
+            lblEditorMensaje.Text = string.Empty;
+            pnlEditorModal.Visible = true;
+        }
+
+        protected void btnCancelarEdicion_Click(object sender, EventArgs e)
+        {
+            pnlEditorModal.Visible = false;
+            lblEditorMensaje.Text = string.Empty;
+        }
+
+        protected void btnGuardarEdicion_Click(object sender, EventArgs e)
+        {
+            if (!UsuarioPuedeEditar())
+            {
+                pnlEditorModal.Visible = false;
+                btnEditor.Visible = false;
+                return;
+            }
+
+            int idDocumento = ConvertirEntero(ViewState["IdDocumento"]);
+            int idCategoria;
+            DateTime fechaRegistro;
+
+            if (idDocumento <= 0 ||
+                !int.TryParse(ddlEditCategoria.SelectedValue, out idCategoria) ||
+                !DateTime.TryParse(txtEditFechaRegistro.Text, out fechaRegistro))
+            {
+                lblEditorMensaje.Text = "Revise la categoría y la fecha de registro.";
+                pnlEditorModal.Visible = true;
+                return;
+            }
+
+            int idUsuarioResponsable = ConvertirEntero(ViewState["IdUsuarioResponsable"]);
+            int idUsuarioModificacion = ObtenerIdUsuarioSesionVerificado();
+
+            DocService.DocServiceSoapClient docService = new DocService.DocServiceSoapClient();
+            string resultado = docService.ActualizarDocumento(
+                idDocumento,
+                txtEditNombre.Text.Trim(),
+                txtEditDescripcion.Text.Trim(),
+                idCategoria,
+                fechaRegistro,
+                idUsuarioResponsable,
+                idUsuarioModificacion);
+
+            if (resultado.IndexOf("Error", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                lblEditorMensaje.Text = resultado;
+                pnlEditorModal.Visible = true;
+                return;
+            }
+
+            pnlEditorModal.Visible = false;
+            CargarDocumento();
         }
 
         private void CargarDocumento()
@@ -73,9 +151,13 @@ namespace Sis.Ges.Doc.Frontend
                     "FechaUltimaModificacion",
                     "fechaModificacion",
                     "fechaUltimaModificacion"));
+                int idUsuarioResponsable = ConvertirEntero(ObtenerValor(documento, "IdUsuarioResponsable", "IdUsuario", "idUsuarioResponsable", "idUsuario"));
+                int idCategoria = ConvertirEntero(ObtenerValor(documento, "IdCategoria", "idCategoria"));
+                string nombreDocumento = ObtenerTexto(ObtenerValor(documento, "NombreDocumento", "nombreDocumento"));
+                string descripcion = ObtenerTexto(ObtenerValor(documento, "Descripcion", "descripcion"));
 
-                lblDocumentName.Text = ObtenerTexto(ObtenerValor(documento, "NombreDocumento", "nombreDocumento"));
-                lblDescription.Text = ObtenerTexto(ObtenerValor(documento, "Descripcion", "descripcion"));
+                lblDocumentName.Text = nombreDocumento;
+                lblDescription.Text = descripcion;
                 lblCategory.Text = ObtenerCategoria(documento);
                 lblDocDate.Text = FormatearFecha(ConvertirFecha(ObtenerValor(documento, "FechaDocumento", "fechaDocumento")));
                 lblDocUser.Text = ObtenerUsuario(documento);
@@ -87,7 +169,14 @@ namespace Sis.Ges.Doc.Frontend
                 lblModificationDate.Text = FormatearFecha(fechaModificacion);
 
                 ViewState["RutaArchivo"] = ObtenerTexto(ObtenerValor(documento, "RutaArchivo", "rutaArchivo"));
+                ViewState["IdDocumento"] = idDocumento;
+                ViewState["IdUsuarioResponsable"] = idUsuarioResponsable;
+                ViewState["IdCategoria"] = idCategoria;
+                ViewState["NombreDocumento"] = nombreDocumento;
+                ViewState["Descripcion"] = descripcion;
+                ViewState["FechaRegistro"] = fechaRegistro;
                 btnDescargar.Enabled = !string.IsNullOrWhiteSpace(ViewState["RutaArchivo"] as string);
+                btnEditor.Visible = UsuarioPuedeEditar();
 
                 pnlMensaje.Visible = false;
                 pnlDetalles.Visible = true;
@@ -144,6 +233,65 @@ namespace Sis.Ges.Doc.Frontend
             lblMensaje.Text = "El documento solicitado no se ha podido encontrar";
             pnlMensaje.Visible = true;
             pnlDetalles.Visible = false;
+            pnlEditorModal.Visible = false;
+        }
+
+        private void CargarCategoriasEditor()
+        {
+            CategoryService.CategoryServiceSoapClient categoryService = new CategoryService.CategoryServiceSoapClient();
+            DataSet categoriasDataSet = categoryService.ObtenerCategorias();
+
+            ddlEditCategoria.Items.Clear();
+            ddlEditCategoria.DataSource = categoriasDataSet.Tables[0];
+            ddlEditCategoria.DataTextField = "nombreCategoria";
+            ddlEditCategoria.DataValueField = "idCategoria";
+            ddlEditCategoria.DataBind();
+        }
+
+        private void SeleccionarCategoriaEditor(int idCategoria)
+        {
+            if (idCategoria <= 0)
+            {
+                return;
+            }
+
+            string valor = idCategoria.ToString(CultureInfo.InvariantCulture);
+            if (ddlEditCategoria.Items.FindByValue(valor) != null)
+            {
+                ddlEditCategoria.SelectedValue = valor;
+            }
+        }
+
+        private bool UsuarioPuedeEditar()
+        {
+            if (Session["Rol"] != null && Session["Rol"].ToString().ToUpper() == "ADMIN")
+            {
+                return true;
+            }
+
+            int idUsuarioSesion = ObtenerIdUsuarioSesionVerificado();
+            int idUsuarioResponsable = ConvertirEntero(ViewState["IdUsuarioResponsable"]);
+
+            return idUsuarioSesion > 0 && idUsuarioSesion == idUsuarioResponsable;
+        }
+
+        private int ObtenerIdUsuarioSesionVerificado()
+        {
+            int idUsuario;
+            if (Session["Usuario"] == null || !int.TryParse(Session["Usuario"].ToString(), out idUsuario) || idUsuario <= 0)
+            {
+                return 0;
+            }
+
+            UserService.UserServiceSoapClient userService = new UserService.UserServiceSoapClient();
+            DataSet usuarioDataSet = userService.ObtenerUsuarioPorId(idUsuario);
+
+            if (usuarioDataSet == null || usuarioDataSet.Tables.Count == 0 || usuarioDataSet.Tables[0].Rows.Count == 0)
+            {
+                return 0;
+            }
+
+            return idUsuario;
         }
 
         private object ObtenerValor(DataRow row, params string[] nombresColumnas)

@@ -167,7 +167,7 @@ namespace Sis.Ges.Doc.Frontend
                         cmd.Parameters.AddWithValue("@Nombre", txtNombre.Text.Trim());
                         cmd.Parameters.AddWithValue("@Correo", txtCorreo.Text.Trim());
                         cmd.Parameters.AddWithValue("@Usuario", txtUsuario.Text.Trim());
-                        cmd.Parameters.AddWithValue("@Password", txtPassword.Text.Trim());
+                        cmd.Parameters.AddWithValue("@Password", SecurityHelper.Sha256Hash(txtPassword.Text));
                         cmd.Parameters.AddWithValue("@Rol", ddlRol.SelectedValue);
 
                         cmd.ExecuteNonQuery();
