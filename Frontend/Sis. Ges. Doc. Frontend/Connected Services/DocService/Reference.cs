@@ -18,10 +18,10 @@ namespace Sis.Ges.Doc.Frontend.DocService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/InsertarDocumento", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        string InsertarDocumento(string filePath, string nombreDocumento, string descripcion, int idCategoria, int idUsuarioResponsable);
+        string InsertarDocumento(string filePath, string nombreDocumento, string descripcion, int idCategoria, System.DateTime fechaDoc, int idUsuarioResponsable);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/InsertarDocumento", ReplyAction="*")]
-        System.Threading.Tasks.Task<string> InsertarDocumentoAsync(string filePath, string nombreDocumento, string descripcion, int idCategoria, int idUsuarioResponsable);
+        System.Threading.Tasks.Task<string> InsertarDocumentoAsync(string filePath, string nombreDocumento, string descripcion, int idCategoria, System.DateTime fechaDoc, int idUsuarioResponsable);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ObtenerDocumentos", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -79,12 +79,12 @@ namespace Sis.Ges.Doc.Frontend.DocService {
                 base(binding, remoteAddress) {
         }
         
-        public string InsertarDocumento(string filePath, string nombreDocumento, string descripcion, int idCategoria, int idUsuarioResponsable) {
-            return base.Channel.InsertarDocumento(filePath, nombreDocumento, descripcion, idCategoria, idUsuarioResponsable);
+        public string InsertarDocumento(string filePath, string nombreDocumento, string descripcion, int idCategoria, System.DateTime fechaDoc, int idUsuarioResponsable) {
+            return base.Channel.InsertarDocumento(filePath, nombreDocumento, descripcion, idCategoria, fechaDoc, idUsuarioResponsable);
         }
         
-        public System.Threading.Tasks.Task<string> InsertarDocumentoAsync(string filePath, string nombreDocumento, string descripcion, int idCategoria, int idUsuarioResponsable) {
-            return base.Channel.InsertarDocumentoAsync(filePath, nombreDocumento, descripcion, idCategoria, idUsuarioResponsable);
+        public System.Threading.Tasks.Task<string> InsertarDocumentoAsync(string filePath, string nombreDocumento, string descripcion, int idCategoria, System.DateTime fechaDoc, int idUsuarioResponsable) {
+            return base.Channel.InsertarDocumentoAsync(filePath, nombreDocumento, descripcion, idCategoria, fechaDoc, idUsuarioResponsable);
         }
         
         public System.Data.DataSet ObtenerDocumentos() {

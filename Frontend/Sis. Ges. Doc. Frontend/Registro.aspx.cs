@@ -29,12 +29,18 @@ namespace Sis.Ges.Doc.Frontend
             HttpPostedFile postedFile = fileUpload.PostedFile;
             string nombre = txtNombre.Text.Trim();
             string descripcion = txtDescripcion.Text.Trim();
-            string categoria = ddlCategoria.SelectedValue;
-            string fecha = txtFecha.Value;
+            int categoriaIndex = ddlCategoria.SelectedIndex;
+            DateTime fecha = DateTime.Parse(txtFecha.Value);
 
             DocService.DocServiceSoapClient docService = new DocService.DocServiceSoapClient();
 
-            docService.InsertarDocumento(postedFile.FileName, nombre, descripcion, int.Parse(categoria), 1);
+            System.Diagnostics.Debug.WriteLine("Archivo seleccionado: " + postedFile.FileName);
+            System.Diagnostics.Debug.WriteLine("Nombre: " + nombre);
+            System.Diagnostics.Debug.WriteLine("Descripcion: " + descripcion);
+            System.Diagnostics.Debug.WriteLine("Categoria Index: " + categoriaIndex);
+            System.Diagnostics.Debug.WriteLine("Fecha: " + fecha.ToString());
+
+            docService.InsertarDocumento(postedFile.FileName, nombre, descripcion, categoriaIndex, fecha, 1);
 
         }
     }

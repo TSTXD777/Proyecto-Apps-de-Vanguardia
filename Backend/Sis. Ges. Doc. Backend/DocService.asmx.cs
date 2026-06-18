@@ -39,13 +39,13 @@ namespace Sis.Ges.Doc.Backend
             }
         }
 
-        // ========== CRUD de la BD ==========
+        // ========== CRUD de la BD ========== https://localhost:44331/DocService.asmx
 
         private string connectionString = ConfigurationManager.ConnectionStrings["DBVanguardia"].ConnectionString;
 
         // INSERT
         [WebMethod]
-        public string InsertarDocumento(string filePath, string nombreDocumento, string descripcion, int idCategoria, int idUsuarioResponsable)
+        public string InsertarDocumento(string filePath, string nombreDocumento, string descripcion, int idCategoria, DateTime fechaDoc, int idUsuarioResponsable)
         {
             string resultado = "";
 
@@ -73,8 +73,8 @@ namespace Sis.Ges.Doc.Backend
                     cmd.Parameters.AddWithValue("@NombreArchivoHash", nombreArchivoHash);
                     cmd.Parameters.AddWithValue("@RutaArchivo", rutaArchivo);
                     cmd.Parameters.AddWithValue("@HashDocumento", sha256Hash);
-                    cmd.Parameters.AddWithValue("@FechaDocumento", DateTime.Now);
-                    cmd.Parameters.AddWithValue("@IdUsuarioModificacion", idUsuarioResponsable);
+                    cmd.Parameters.AddWithValue("@FechaDocumento", fechaDoc);
+                    cmd.Parameters.AddWithValue("@IdUsuarioModificacion", idUsuarioResponsable);    
 
                     cmd.ExecuteNonQuery();
                     resultado = "Documento insertado correctamente.";

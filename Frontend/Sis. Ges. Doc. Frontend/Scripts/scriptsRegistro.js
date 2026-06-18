@@ -191,9 +191,11 @@ function onRegistrarClick() {
             else if (! _fieldHasValue(descEl)) { descEl && descEl.focus(); }
             else if (! _fieldHasValue(catEl)) { catEl && catEl.focus(); }
             else if (! _fieldHasValue(dateEl)) { dateEl && dateEl.focus(); }
-            else if (! _fieldHasValue(fileEl)) { fileEl && fileEl.focus(); }
+            else if (!_fieldHasValue(fileEl)) { fileEl && fileEl.focus(); }
+            console.log("validación Neles")
             return false;
         }
+        console.log("validación OK")
         return true;
     } catch (e) { try { console.error(e); } catch (_) {} return false; }
 }
