@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:tns="http://tempuri.org/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="GetUserIPAddress">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetUserIPAddressResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetUserIPAddressResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerBitacora">
+        <s:complexType />
+      </s:element>
+      <s:element name="ObtenerBitacoraResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObtenerBitacoraResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerBitacoraPorId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idBitacora" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerBitacoraPorIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObtenerBitacoraPorIdResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetUserIPAddressSoapIn">
+    <wsdl:part name="parameters" element="tns:GetUserIPAddress" />
+  </wsdl:message>
+  <wsdl:message name="GetUserIPAddressSoapOut">
+    <wsdl:part name="parameters" element="tns:GetUserIPAddressResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerBitacoraSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenerBitacora" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerBitacoraSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenerBitacoraResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerBitacoraPorIdSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenerBitacoraPorId" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerBitacoraPorIdSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenerBitacoraPorIdResponse" />
+  </wsdl:message>
+  <wsdl:portType name="BitacoraServiceSoap">
+    <wsdl:operation name="GetUserIPAddress">
+      <wsdl:input message="tns:GetUserIPAddressSoapIn" />
+      <wsdl:output message="tns:GetUserIPAddressSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerBitacora">
+      <wsdl:input message="tns:ObtenerBitacoraSoapIn" />
+      <wsdl:output message="tns:ObtenerBitacoraSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerBitacoraPorId">
+      <wsdl:input message="tns:ObtenerBitacoraPorIdSoapIn" />
+      <wsdl:output message="tns:ObtenerBitacoraPorIdSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BitacoraServiceSoap" type="tns:BitacoraServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetUserIPAddress">
+      <soap:operation soapAction="http://tempuri.org/GetUserIPAddress" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerBitacora">
+      <soap:operation soapAction="http://tempuri.org/ObtenerBitacora" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerBitacoraPorId">
+      <soap:operation soapAction="http://tempuri.org/ObtenerBitacoraPorId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BitacoraServiceSoap12" type="tns:BitacoraServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetUserIPAddress">
+      <soap12:operation soapAction="http://tempuri.org/GetUserIPAddress" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerBitacora">
+      <soap12:operation soapAction="http://tempuri.org/ObtenerBitacora" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerBitacoraPorId">
+      <soap12:operation soapAction="http://tempuri.org/ObtenerBitacoraPorId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="BitacoraService">
+    <wsdl:port name="BitacoraServiceSoap" binding="tns:BitacoraServiceSoap">
+      <soap:address location="https://localhost:44331/BitacoraService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="BitacoraServiceSoap12" binding="tns:BitacoraServiceSoap12">
+      <soap12:address location="https://localhost:44331/BitacoraService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
