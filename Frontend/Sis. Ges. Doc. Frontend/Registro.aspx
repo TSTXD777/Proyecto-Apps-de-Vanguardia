@@ -1,61 +1,19 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Registro.aspx.cs" Inherits="Sis.Ges.Doc.Frontend.WebForm1" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Registro.aspx.cs" Inherits="Sis.Ges.Doc.Frontend.WebForm1" MasterPageFile="~/WebApp.Master" %>
 
-<!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title>Registro de Documentos</title>
-    <script type="text/javascript">
-        function ValidateForm() {
-            var fileInput = document.getElementById('<%= fileUpload.ClientID %>');
-            var nombre = document.getElementById('<%= txtNombre.ClientID %>');
-            var descripcion = document.getElementById('<%= txtDescripcion.ClientID %>');
-            var categoria = document.getElementById('<%= ddlCategoria.ClientID %>');
-            var fecha = document.getElementById('<%= calFecha.ClientID %>');
-            var submitBtn = document.getElementById('<%= btnRegistrar.ClientID %>');
-
-            var isValid = fileInput.value.trim() !== '' &&
-                nombre.value.trim() !== '' &&
-                descripcion.value.trim() !== '' &&
-                categoria.value !== '' &&
-                fecha.value.trim() !== '';
-
-            submitBtn.disabled = !isValid;
-            return isValid;
-        }
-
-        function OnFileChange() {
-            ValidateForm();
-        }
-
-        function OnNombreChange() {
-            ValidateForm();
-        }
-
-        function OnDescripcionChange() {
-            ValidateForm();
-        }
-
-        function OnCategoriaChange() {
-            ValidateForm();
-        }
-
-        function OnFechaChange() {
-            ValidateForm();
-        }
-
-        window.onload = function() {
-            ValidateForm();
-        };
-    </script>
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 20px;
+        }
+        /* Override container padding to remove gaps around navbar */
+        .container.body-content {
+            padding-left: 0;
+            padding-right: 0;
+            padding-top: 0;
         }
         .form-container {
             max-width: 600px;
-            margin: 0 auto;
+            margin: 20px auto;
             padding: 20px;
             border: 1px solid #cccccc;
             border-radius: 5px;
@@ -102,9 +60,49 @@
             cursor: not-allowed;
         }
     </style>
-</head>
-<body>
-    <form id="form1" runat="server" enctype="multipart/form-data">
+    <script type="text/javascript">
+        function ValidateForm() {
+            var fileInput = document.getElementById('<%= fileUpload.ClientID %>');
+            var nombre = document.getElementById('<%= txtNombre.ClientID %>');
+            var descripcion = document.getElementById('<%= txtDescripcion.ClientID %>');
+            var categoria = document.getElementById('<%= ddlCategoria.ClientID %>');
+            var fecha = document.getElementById('<%= calFecha.ClientID %>');
+            var submitBtn = document.getElementById('<%= btnRegistrar.ClientID %>');
+
+            var isValid = fileInput.value.trim() !== '' &&
+                nombre.value.trim() !== '' &&
+                descripcion.value.trim() !== '' &&
+                categoria.value !== '' &&
+                fecha.value.trim() !== '';
+
+            submitBtn.disabled = !isValid;
+            return isValid;
+        }
+
+        function OnFileChange() {
+            ValidateForm();
+        }
+
+        function OnNombreChange() {
+            ValidateForm();
+        }
+
+        function OnDescripcionChange() {
+            ValidateForm();
+        }
+
+        function OnCategoriaChange() {
+            ValidateForm();
+        }
+
+        function OnFechaChange() {
+            ValidateForm();
+        }
+
+        window.onload = function() {
+            ValidateForm();
+        };
+    </script>
         <div class="form-container">
             <h2>Registro de Documentos</h2>
 
@@ -137,6 +135,4 @@
 
             <asp:Button ID="btnRegistrar" runat="server" Text="Registrar" OnClick="btnRegistrar_Click" OnClientClick="return ValidateForm();" disabled="disabled" />
         </div>
-    </form>
-</body>
-</html>
+</asp:Content>
