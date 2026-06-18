@@ -253,7 +253,7 @@
     <form id="form1" runat="server">
         <!-- Header -->
         <div class="header">
-            <div class="header-icon">🏠</div>
+            <a href="Documentos.aspx" class="header-icon">⬅️</a><div class="header-icon">✍️</div>
             <div class="user-icon">👤</div>
         </div>
 

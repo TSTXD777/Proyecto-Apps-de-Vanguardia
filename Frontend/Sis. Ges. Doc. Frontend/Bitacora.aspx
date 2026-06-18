@@ -132,15 +132,15 @@
                 <label>Operación</label>
 
                 <asp:DropDownList ID="ddlOperacion"
-                    runat="server">
+    runat="server">
 
-                    <asp:ListItem Text="Todas" Value=""></asp:ListItem>
-                    <asp:ListItem Text="Crear Usuario" Value="CREAR"></asp:ListItem>
-                    <asp:ListItem Text="Editar Usuario" Value="EDITAR"></asp:ListItem>
-                    <asp:ListItem Text="Registrar Documento" Value="DOCUMENTO"></asp:ListItem>
-                    <asp:ListItem Text="Descargar Documento" Value="DESCARGAR"></asp:ListItem>
+    <asp:ListItem Text="Todas" Value=""></asp:ListItem>
+    <asp:ListItem Text="Crear Usuario" Value="CREAR"></asp:ListItem>
+    <asp:ListItem Text="Editar Usuario" Value="EDITAR"></asp:ListItem>
+    <asp:ListItem Text="Registrar Documento" Value="INSERT"></asp:ListItem>
+    <asp:ListItem Text="Editar Documento" Value="UPDATE"></asp:ListItem>
 
-                </asp:DropDownList>
+</asp:DropDownList>
             </div>
 
             <asp:Button ID="btnBuscar"
