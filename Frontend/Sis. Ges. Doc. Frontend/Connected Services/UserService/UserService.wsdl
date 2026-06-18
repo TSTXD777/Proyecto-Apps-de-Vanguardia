@@ -12,28 +12,32 @@
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="InsertarCategoria">
+      <s:element name="InsertarUsuario">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="nombreCategoria" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="descripcion" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="nombreCompleto" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="correo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="usuario" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="passwordHash" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="idDepartamento" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="rol" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="InsertarCategoriaResponse">
+      <s:element name="InsertarUsuarioResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="InsertarCategoriaResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="InsertarUsuarioResult" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="ObtenerCategorias">
+      <s:element name="ObtenerUsuarios">
         <s:complexType />
       </s:element>
-      <s:element name="ObtenerCategoriasResponse">
+      <s:element name="ObtenerUsuariosResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="ObtenerCategoriasResult">
+            <s:element minOccurs="0" maxOccurs="1" name="ObtenerUsuariosResult">
               <s:complexType>
                 <s:sequence>
                   <s:element ref="s:schema" />
@@ -44,17 +48,17 @@
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="ObtenerCategoriaPorId">
+      <s:element name="ObtenerUsuarioPorId">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="1" maxOccurs="1" name="idCategoria" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="idUsuario" type="s:int" />
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="ObtenerCategoriaPorIdResponse">
+      <s:element name="ObtenerUsuarioPorIdResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="ObtenerCategoriaPorIdResult">
+            <s:element minOccurs="0" maxOccurs="1" name="ObtenerUsuarioPorIdResult">
               <s:complexType>
                 <s:sequence>
                   <s:element ref="s:schema" />
@@ -65,33 +69,37 @@
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="ActualizarCategoria">
+      <s:element name="ActualizarUsuario">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="1" maxOccurs="1" name="idCategoria" type="s:int" />
-            <s:element minOccurs="0" maxOccurs="1" name="nombreCategoria" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="descripcion" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="idUsuario" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="nombreCompleto" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="correo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="usuario" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="passwordHash" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="idDepartamento" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="rol" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="ActualizarCategoriaResponse">
+      <s:element name="ActualizarUsuarioResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="ActualizarCategoriaResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ActualizarUsuarioResult" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="EliminarCategoria">
+      <s:element name="EliminarUsuario">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="1" maxOccurs="1" name="idCategoria" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="idUsuario" type="s:int" />
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="EliminarCategoriaResponse">
+      <s:element name="EliminarUsuarioResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="EliminarCategoriaResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="EliminarUsuarioResult" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -103,60 +111,60 @@
   <wsdl:message name="PasswordEncryptSoapOut">
     <wsdl:part name="parameters" element="tns:PasswordEncryptResponse" />
   </wsdl:message>
-  <wsdl:message name="InsertarCategoriaSoapIn">
-    <wsdl:part name="parameters" element="tns:InsertarCategoria" />
+  <wsdl:message name="InsertarUsuarioSoapIn">
+    <wsdl:part name="parameters" element="tns:InsertarUsuario" />
   </wsdl:message>
-  <wsdl:message name="InsertarCategoriaSoapOut">
-    <wsdl:part name="parameters" element="tns:InsertarCategoriaResponse" />
+  <wsdl:message name="InsertarUsuarioSoapOut">
+    <wsdl:part name="parameters" element="tns:InsertarUsuarioResponse" />
   </wsdl:message>
-  <wsdl:message name="ObtenerCategoriasSoapIn">
-    <wsdl:part name="parameters" element="tns:ObtenerCategorias" />
+  <wsdl:message name="ObtenerUsuariosSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenerUsuarios" />
   </wsdl:message>
-  <wsdl:message name="ObtenerCategoriasSoapOut">
-    <wsdl:part name="parameters" element="tns:ObtenerCategoriasResponse" />
+  <wsdl:message name="ObtenerUsuariosSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenerUsuariosResponse" />
   </wsdl:message>
-  <wsdl:message name="ObtenerCategoriaPorIdSoapIn">
-    <wsdl:part name="parameters" element="tns:ObtenerCategoriaPorId" />
+  <wsdl:message name="ObtenerUsuarioPorIdSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenerUsuarioPorId" />
   </wsdl:message>
-  <wsdl:message name="ObtenerCategoriaPorIdSoapOut">
-    <wsdl:part name="parameters" element="tns:ObtenerCategoriaPorIdResponse" />
+  <wsdl:message name="ObtenerUsuarioPorIdSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenerUsuarioPorIdResponse" />
   </wsdl:message>
-  <wsdl:message name="ActualizarCategoriaSoapIn">
-    <wsdl:part name="parameters" element="tns:ActualizarCategoria" />
+  <wsdl:message name="ActualizarUsuarioSoapIn">
+    <wsdl:part name="parameters" element="tns:ActualizarUsuario" />
   </wsdl:message>
-  <wsdl:message name="ActualizarCategoriaSoapOut">
-    <wsdl:part name="parameters" element="tns:ActualizarCategoriaResponse" />
+  <wsdl:message name="ActualizarUsuarioSoapOut">
+    <wsdl:part name="parameters" element="tns:ActualizarUsuarioResponse" />
   </wsdl:message>
-  <wsdl:message name="EliminarCategoriaSoapIn">
-    <wsdl:part name="parameters" element="tns:EliminarCategoria" />
+  <wsdl:message name="EliminarUsuarioSoapIn">
+    <wsdl:part name="parameters" element="tns:EliminarUsuario" />
   </wsdl:message>
-  <wsdl:message name="EliminarCategoriaSoapOut">
-    <wsdl:part name="parameters" element="tns:EliminarCategoriaResponse" />
+  <wsdl:message name="EliminarUsuarioSoapOut">
+    <wsdl:part name="parameters" element="tns:EliminarUsuarioResponse" />
   </wsdl:message>
   <wsdl:portType name="UserServiceSoap">
     <wsdl:operation name="PasswordEncrypt">
       <wsdl:input message="tns:PasswordEncryptSoapIn" />
       <wsdl:output message="tns:PasswordEncryptSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="InsertarCategoria">
-      <wsdl:input message="tns:InsertarCategoriaSoapIn" />
-      <wsdl:output message="tns:InsertarCategoriaSoapOut" />
+    <wsdl:operation name="InsertarUsuario">
+      <wsdl:input message="tns:InsertarUsuarioSoapIn" />
+      <wsdl:output message="tns:InsertarUsuarioSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="ObtenerCategorias">
-      <wsdl:input message="tns:ObtenerCategoriasSoapIn" />
-      <wsdl:output message="tns:ObtenerCategoriasSoapOut" />
+    <wsdl:operation name="ObtenerUsuarios">
+      <wsdl:input message="tns:ObtenerUsuariosSoapIn" />
+      <wsdl:output message="tns:ObtenerUsuariosSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="ObtenerCategoriaPorId">
-      <wsdl:input message="tns:ObtenerCategoriaPorIdSoapIn" />
-      <wsdl:output message="tns:ObtenerCategoriaPorIdSoapOut" />
+    <wsdl:operation name="ObtenerUsuarioPorId">
+      <wsdl:input message="tns:ObtenerUsuarioPorIdSoapIn" />
+      <wsdl:output message="tns:ObtenerUsuarioPorIdSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="ActualizarCategoria">
-      <wsdl:input message="tns:ActualizarCategoriaSoapIn" />
-      <wsdl:output message="tns:ActualizarCategoriaSoapOut" />
+    <wsdl:operation name="ActualizarUsuario">
+      <wsdl:input message="tns:ActualizarUsuarioSoapIn" />
+      <wsdl:output message="tns:ActualizarUsuarioSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="EliminarCategoria">
-      <wsdl:input message="tns:EliminarCategoriaSoapIn" />
-      <wsdl:output message="tns:EliminarCategoriaSoapOut" />
+    <wsdl:operation name="EliminarUsuario">
+      <wsdl:input message="tns:EliminarUsuarioSoapIn" />
+      <wsdl:output message="tns:EliminarUsuarioSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="UserServiceSoap" type="tns:UserServiceSoap">
@@ -170,8 +178,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="InsertarCategoria">
-      <soap:operation soapAction="http://tempuri.org/InsertarCategoria" style="document" />
+    <wsdl:operation name="InsertarUsuario">
+      <soap:operation soapAction="http://tempuri.org/InsertarUsuario" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -179,8 +187,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="ObtenerCategorias">
-      <soap:operation soapAction="http://tempuri.org/ObtenerCategorias" style="document" />
+    <wsdl:operation name="ObtenerUsuarios">
+      <soap:operation soapAction="http://tempuri.org/ObtenerUsuarios" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -188,8 +196,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="ObtenerCategoriaPorId">
-      <soap:operation soapAction="http://tempuri.org/ObtenerCategoriaPorId" style="document" />
+    <wsdl:operation name="ObtenerUsuarioPorId">
+      <soap:operation soapAction="http://tempuri.org/ObtenerUsuarioPorId" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -197,8 +205,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="ActualizarCategoria">
-      <soap:operation soapAction="http://tempuri.org/ActualizarCategoria" style="document" />
+    <wsdl:operation name="ActualizarUsuario">
+      <soap:operation soapAction="http://tempuri.org/ActualizarUsuario" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -206,8 +214,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="EliminarCategoria">
-      <soap:operation soapAction="http://tempuri.org/EliminarCategoria" style="document" />
+    <wsdl:operation name="EliminarUsuario">
+      <soap:operation soapAction="http://tempuri.org/EliminarUsuario" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -227,8 +235,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="InsertarCategoria">
-      <soap12:operation soapAction="http://tempuri.org/InsertarCategoria" style="document" />
+    <wsdl:operation name="InsertarUsuario">
+      <soap12:operation soapAction="http://tempuri.org/InsertarUsuario" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -236,8 +244,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="ObtenerCategorias">
-      <soap12:operation soapAction="http://tempuri.org/ObtenerCategorias" style="document" />
+    <wsdl:operation name="ObtenerUsuarios">
+      <soap12:operation soapAction="http://tempuri.org/ObtenerUsuarios" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -245,8 +253,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="ObtenerCategoriaPorId">
-      <soap12:operation soapAction="http://tempuri.org/ObtenerCategoriaPorId" style="document" />
+    <wsdl:operation name="ObtenerUsuarioPorId">
+      <soap12:operation soapAction="http://tempuri.org/ObtenerUsuarioPorId" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -254,8 +262,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="ActualizarCategoria">
-      <soap12:operation soapAction="http://tempuri.org/ActualizarCategoria" style="document" />
+    <wsdl:operation name="ActualizarUsuario">
+      <soap12:operation soapAction="http://tempuri.org/ActualizarUsuario" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -263,8 +271,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="EliminarCategoria">
-      <soap12:operation soapAction="http://tempuri.org/EliminarCategoria" style="document" />
+    <wsdl:operation name="EliminarUsuario">
+      <soap12:operation soapAction="http://tempuri.org/EliminarUsuario" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

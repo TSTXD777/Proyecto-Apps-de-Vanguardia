@@ -234,27 +234,27 @@
                     </div>
 
                     <div class="detail-group">
-                        <label class="detail-label">Fecha del Doc</label>
+                        <label class="detail-label">Fecha del Doc:</label>
                         <asp:TextBox ID="txtDocDate" runat="server" CssClass="detail-input" TextMode="Date"></asp:TextBox>
                     </div>
 
                     <div class="detail-group">
-                        <label class="detail-label">Usuario del Doc</label>
+                        <label class="detail-label">Subido por Usuario:</label>
                         <asp:TextBox ID="txtDocUser" runat="server" CssClass="detail-input" placeholder="Usuario"></asp:TextBox>
                     </div>
 
                     <div class="detail-group">
-                        <label class="detail-label">Fecha de Subida</label>
+                        <label class="detail-label">Fecha de Registro: </label>
                         <asp:TextBox ID="txtUploadDate" runat="server" CssClass="detail-input" TextMode="Date"></asp:TextBox>
                     </div>
 
                     <div class="detail-group">
-                        <label class="detail-label">Fecha de Modificación</label>
+                        <label class="detail-label">Fecha de Última Modificación: </label>
                         <asp:TextBox ID="txtModificationDate" runat="server" CssClass="detail-input" TextMode="Date"></asp:TextBox>
                     </div>
 
                     <div class="detail-group">
-                        <label class="detail-label">SHA256</label>
+                        <label class="detail-label">SHA256: </label>
                         <asp:TextBox ID="txtSHA256" runat="server" CssClass="detail-input" placeholder="SHA256 Hash"></asp:TextBox>
                     </div>
 

@@ -23,40 +23,40 @@ namespace Sis.Ges.Doc.Frontend.UserService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/PasswordEncrypt", ReplyAction="*")]
         System.Threading.Tasks.Task<string> PasswordEncryptAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/InsertarCategoria", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/InsertarUsuario", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        string InsertarCategoria(string nombreCategoria, string descripcion);
+        string InsertarUsuario(string nombreCompleto, string correo, string usuario, string passwordHash, int idDepartamento, string rol);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/InsertarCategoria", ReplyAction="*")]
-        System.Threading.Tasks.Task<string> InsertarCategoriaAsync(string nombreCategoria, string descripcion);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/InsertarUsuario", ReplyAction="*")]
+        System.Threading.Tasks.Task<string> InsertarUsuarioAsync(string nombreCompleto, string correo, string usuario, string passwordHash, int idDepartamento, string rol);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ObtenerCategorias", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ObtenerUsuarios", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Data.DataSet ObtenerCategorias();
+        System.Data.DataSet ObtenerUsuarios();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ObtenerCategorias", ReplyAction="*")]
-        System.Threading.Tasks.Task<System.Data.DataSet> ObtenerCategoriasAsync();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ObtenerUsuarios", ReplyAction="*")]
+        System.Threading.Tasks.Task<System.Data.DataSet> ObtenerUsuariosAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ObtenerCategoriaPorId", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ObtenerUsuarioPorId", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Data.DataSet ObtenerCategoriaPorId(int idCategoria);
+        System.Data.DataSet ObtenerUsuarioPorId(int idUsuario);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ObtenerCategoriaPorId", ReplyAction="*")]
-        System.Threading.Tasks.Task<System.Data.DataSet> ObtenerCategoriaPorIdAsync(int idCategoria);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ObtenerUsuarioPorId", ReplyAction="*")]
+        System.Threading.Tasks.Task<System.Data.DataSet> ObtenerUsuarioPorIdAsync(int idUsuario);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ActualizarCategoria", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ActualizarUsuario", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        string ActualizarCategoria(int idCategoria, string nombreCategoria, string descripcion);
+        string ActualizarUsuario(int idUsuario, string nombreCompleto, string correo, string usuario, string passwordHash, int idDepartamento, string rol);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ActualizarCategoria", ReplyAction="*")]
-        System.Threading.Tasks.Task<string> ActualizarCategoriaAsync(int idCategoria, string nombreCategoria, string descripcion);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ActualizarUsuario", ReplyAction="*")]
+        System.Threading.Tasks.Task<string> ActualizarUsuarioAsync(int idUsuario, string nombreCompleto, string correo, string usuario, string passwordHash, int idDepartamento, string rol);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/EliminarCategoria", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/EliminarUsuario", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        string EliminarCategoria(int idCategoria);
+        string EliminarUsuario(int idUsuario);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/EliminarCategoria", ReplyAction="*")]
-        System.Threading.Tasks.Task<string> EliminarCategoriaAsync(int idCategoria);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/EliminarUsuario", ReplyAction="*")]
+        System.Threading.Tasks.Task<string> EliminarUsuarioAsync(int idUsuario);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -94,44 +94,44 @@ namespace Sis.Ges.Doc.Frontend.UserService {
             return base.Channel.PasswordEncryptAsync();
         }
         
-        public string InsertarCategoria(string nombreCategoria, string descripcion) {
-            return base.Channel.InsertarCategoria(nombreCategoria, descripcion);
+        public string InsertarUsuario(string nombreCompleto, string correo, string usuario, string passwordHash, int idDepartamento, string rol) {
+            return base.Channel.InsertarUsuario(nombreCompleto, correo, usuario, passwordHash, idDepartamento, rol);
         }
         
-        public System.Threading.Tasks.Task<string> InsertarCategoriaAsync(string nombreCategoria, string descripcion) {
-            return base.Channel.InsertarCategoriaAsync(nombreCategoria, descripcion);
+        public System.Threading.Tasks.Task<string> InsertarUsuarioAsync(string nombreCompleto, string correo, string usuario, string passwordHash, int idDepartamento, string rol) {
+            return base.Channel.InsertarUsuarioAsync(nombreCompleto, correo, usuario, passwordHash, idDepartamento, rol);
         }
         
-        public System.Data.DataSet ObtenerCategorias() {
-            return base.Channel.ObtenerCategorias();
+        public System.Data.DataSet ObtenerUsuarios() {
+            return base.Channel.ObtenerUsuarios();
         }
         
-        public System.Threading.Tasks.Task<System.Data.DataSet> ObtenerCategoriasAsync() {
-            return base.Channel.ObtenerCategoriasAsync();
+        public System.Threading.Tasks.Task<System.Data.DataSet> ObtenerUsuariosAsync() {
+            return base.Channel.ObtenerUsuariosAsync();
         }
         
-        public System.Data.DataSet ObtenerCategoriaPorId(int idCategoria) {
-            return base.Channel.ObtenerCategoriaPorId(idCategoria);
+        public System.Data.DataSet ObtenerUsuarioPorId(int idUsuario) {
+            return base.Channel.ObtenerUsuarioPorId(idUsuario);
         }
         
-        public System.Threading.Tasks.Task<System.Data.DataSet> ObtenerCategoriaPorIdAsync(int idCategoria) {
-            return base.Channel.ObtenerCategoriaPorIdAsync(idCategoria);
+        public System.Threading.Tasks.Task<System.Data.DataSet> ObtenerUsuarioPorIdAsync(int idUsuario) {
+            return base.Channel.ObtenerUsuarioPorIdAsync(idUsuario);
         }
         
-        public string ActualizarCategoria(int idCategoria, string nombreCategoria, string descripcion) {
-            return base.Channel.ActualizarCategoria(idCategoria, nombreCategoria, descripcion);
+        public string ActualizarUsuario(int idUsuario, string nombreCompleto, string correo, string usuario, string passwordHash, int idDepartamento, string rol) {
+            return base.Channel.ActualizarUsuario(idUsuario, nombreCompleto, correo, usuario, passwordHash, idDepartamento, rol);
         }
         
-        public System.Threading.Tasks.Task<string> ActualizarCategoriaAsync(int idCategoria, string nombreCategoria, string descripcion) {
-            return base.Channel.ActualizarCategoriaAsync(idCategoria, nombreCategoria, descripcion);
+        public System.Threading.Tasks.Task<string> ActualizarUsuarioAsync(int idUsuario, string nombreCompleto, string correo, string usuario, string passwordHash, int idDepartamento, string rol) {
+            return base.Channel.ActualizarUsuarioAsync(idUsuario, nombreCompleto, correo, usuario, passwordHash, idDepartamento, rol);
         }
         
-        public string EliminarCategoria(int idCategoria) {
-            return base.Channel.EliminarCategoria(idCategoria);
+        public string EliminarUsuario(int idUsuario) {
+            return base.Channel.EliminarUsuario(idUsuario);
         }
         
-        public System.Threading.Tasks.Task<string> EliminarCategoriaAsync(int idCategoria) {
-            return base.Channel.EliminarCategoriaAsync(idCategoria);
+        public System.Threading.Tasks.Task<string> EliminarUsuarioAsync(int idUsuario) {
+            return base.Channel.EliminarUsuarioAsync(idUsuario);
         }
     }
 }
