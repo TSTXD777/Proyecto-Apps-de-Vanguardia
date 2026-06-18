@@ -26,6 +26,8 @@ namespace Sis.Ges.Doc.Frontend
 
         protected void btnRegistrar_Click(object sender, EventArgs e)
         {
+            System.Diagnostics.Debug.WriteLine("SERVER CLICK");
+
             HttpPostedFile postedFile = fileUpload.PostedFile;
             string nombre = txtNombre.Text.Trim();
             string descripcion = txtDescripcion.Text.Trim();

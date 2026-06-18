@@ -1,0 +1,81 @@
+
+body{
+font-family:Arial,sans-serif;
+background:#efefef;
+width:80%;
+margin:auto;
+color:#111;
+}
+.topbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px;
+}
+.logo{
+font-size:50px;
+font-weight:bold;
+}
+.hero img{
+width:100%;
+height:auto;
+}
+.hero h1{font-size:54px;margin-bottom:5px;}
+button{
+background:#d9d9d9;
+border:none;
+padding:12px 40px;
+border-radius:8px;
+font-size:18px;
+}
+section{margin:40px 0;}
+.cards{
+display:flex;
+gap:25px;
+justify-content:space-between;
+}
+.four .card{width:23%;}
+.card{
+text-align:center;
+flex:1;
+}
+.card img{
+width:100%;
+}
+.old{
+text-decoration:line-through;
+font-size:12px;
+display:block;
+}
+.red{
+color:red;
+display:block;
+}
+.reviews{
+display:flex;
+gap:20px;
+}
+.review{
+background:black;
+color:white;
+padding:20px;
+border-radius:10px;
+flex:1;
+}
+.social{text-align:center;}
+.icons-row{
+display:flex;
+justify-content:center;
+gap:50px;
+}
+footer{
+background:black;
+color:white;
+padding:30px;
+margin-top:30px;
+font-size:14px;
+}
+hr{
+border:0;
+border-top:1px solid #bbb;
+}

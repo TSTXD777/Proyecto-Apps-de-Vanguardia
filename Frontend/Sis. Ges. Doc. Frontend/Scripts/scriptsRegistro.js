@@ -89,11 +89,13 @@ function setupUpload(fileInputId, statusId, uploadUrl, btnUniqueID, btnClientID)
 
         btn.addEventListener('click', function (e) {
             // If there's a pending file, prevent default/postback and upload first
+            console.log("listener click");
             if (hasPendingFile(fileInputId)) {
                 e.preventDefault();
                 uploadPendingFile(fileInputId, statusId, uploadUrl).then(function () {
                     // after upload, trigger ASP.NET postback
                     try { __doPostBack(btnUniqueID, ''); } catch (ex) {
+                        console.log("calling __doPostBack");
                         var form = document.getElementById('form1');
                         if (form) form.submit();
                     }
@@ -175,6 +177,7 @@ function setupValidation(fileInputId, nameId, descId, catId, dateId, btnClientID
 }
 
 function onRegistrarClick() {
+    console.log("client click");
     try {
         if (!window._validationConfig) return true; // no validation wired
         var cfg = window._validationConfig;
