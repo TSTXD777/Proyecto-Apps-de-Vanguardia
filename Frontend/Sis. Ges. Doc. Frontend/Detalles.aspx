@@ -121,33 +121,25 @@
         .detail-label {
             font-weight: bold;
             color: #333;
-            margin-bottom: 8px;
             font-size: 14px;
+            display: inline;
         }
 
-        .detail-input {
-            width: 100%;
-            padding: 10px;
-            border: none;
-            border-bottom: 1px solid #999;
+        .detail-value {
+            color: #333;
             font-size: 14px;
             font-family: Arial, sans-serif;
+            line-height: 1.6;
+            overflow-wrap: anywhere;
         }
 
-        .detail-textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            font-size: 14px;
-            font-family: Arial, sans-serif;
-            resize: vertical;
-            min-height: 80px;
-        }
-
-        .detail-input:focus,
-        .detail-textarea:focus {
-            outline: none;
-            border-color: #666;
+        .not-found-message {
+            color: #8a1f11;
+            background-color: #fff3f0;
+            border: 1px solid #e2b8ae;
+            padding: 15px;
+            text-align: center;
+            font-size: 16px;
         }
 
         .scrollbar-decoration {
@@ -211,57 +203,63 @@
                     <div class="doc-preview">Doc. Preview</div>
                     <div class="preview-controls">
                         <button type="button" class="preview-btn">◀</button>
-                        <span class="pagination">Pag. <asp:TextBox ID="txtPageNumber" runat="server" Text="1" style="width: 30px; text-align: center; border: none; background-color: transparent;"></asp:TextBox></span>
+                        <span class="pagination">Pag. 1</span>
                         <button type="button" class="preview-btn">▶</button>
                     </div>
                 </div>
 
                 <!-- Document Details Section -->
                 <div class="details-section">
-                    <div class="detail-group">
-                        <label class="detail-label">Nombre del Doc.</label>
-                        <asp:TextBox ID="txtDocumentName" runat="server" CssClass="detail-input" placeholder="Ingrese el nombre del documento"></asp:TextBox>
-                    </div>
+                    <asp:Panel ID="pnlMensaje" runat="server" CssClass="not-found-message" Visible="false">
+                        <asp:Label ID="lblMensaje" runat="server"></asp:Label>
+                    </asp:Panel>
 
-                    <div class="detail-group">
-                        <label class="detail-label">Descripción</label>
-                        <asp:TextBox ID="txtDescription" runat="server" CssClass="detail-textarea" TextMode="MultiLine" placeholder="Ingrese la descripción del documento"></asp:TextBox>
-                    </div>
+                    <asp:Panel ID="pnlDetalles" runat="server">
+                        <div class="detail-group">
+                            <span class="detail-label">Nombre del Doc.: </span>
+                            <asp:Label ID="lblDocumentName" runat="server" CssClass="detail-value"></asp:Label>
+                        </div>
 
-                    <div class="detail-group">
-                        <label class="detail-label">Categoría:</label>
-                        <asp:TextBox ID="txtCategory" runat="server" CssClass="detail-input" placeholder="Ingrese la categoría"></asp:TextBox>
-                    </div>
+                        <div class="detail-group">
+                            <span class="detail-label">Descripción: </span>
+                            <asp:Label ID="lblDescription" runat="server" CssClass="detail-value"></asp:Label>
+                        </div>
 
-                    <div class="detail-group">
-                        <label class="detail-label">Fecha del Doc:</label>
-                        <asp:TextBox ID="txtDocDate" runat="server" CssClass="detail-input" TextMode="Date"></asp:TextBox>
-                    </div>
+                        <div class="detail-group">
+                            <span class="detail-label">Categoría: </span>
+                            <asp:Label ID="lblCategory" runat="server" CssClass="detail-value"></asp:Label>
+                        </div>
 
-                    <div class="detail-group">
-                        <label class="detail-label">Subido por Usuario:</label>
-                        <asp:TextBox ID="txtDocUser" runat="server" CssClass="detail-input" placeholder="Usuario"></asp:TextBox>
-                    </div>
+                        <div class="detail-group">
+                            <span class="detail-label">Fecha del Doc.: </span>
+                            <asp:Label ID="lblDocDate" runat="server" CssClass="detail-value"></asp:Label>
+                        </div>
 
-                    <div class="detail-group">
-                        <label class="detail-label">Fecha de Registro: </label>
-                        <asp:TextBox ID="txtUploadDate" runat="server" CssClass="detail-input" TextMode="Date"></asp:TextBox>
-                    </div>
+                        <div class="detail-group">
+                            <span class="detail-label">Subido por Usuario: </span>
+                            <asp:Label ID="lblDocUser" runat="server" CssClass="detail-value"></asp:Label>
+                        </div>
 
-                    <div class="detail-group">
-                        <label class="detail-label">Fecha de Última Modificación: </label>
-                        <asp:TextBox ID="txtModificationDate" runat="server" CssClass="detail-input" TextMode="Date"></asp:TextBox>
-                    </div>
+                        <div class="detail-group">
+                            <span class="detail-label">Fecha de Registro: </span>
+                            <asp:Label ID="lblUploadDate" runat="server" CssClass="detail-value"></asp:Label>
+                        </div>
 
-                    <div class="detail-group">
-                        <label class="detail-label">SHA256: </label>
-                        <asp:TextBox ID="txtSHA256" runat="server" CssClass="detail-input" placeholder="SHA256 Hash"></asp:TextBox>
-                    </div>
+                        <asp:Panel ID="pnlModificationDate" runat="server" CssClass="detail-group">
+                            <span class="detail-label">Fecha de Modificación: </span>
+                            <asp:Label ID="lblModificationDate" runat="server" CssClass="detail-value"></asp:Label>
+                        </asp:Panel>
 
-                    <div class="button-group">
-                        <asp:Button ID="btnEditor" runat="server" Text="✎ Editor" CssClass="btn btn-editor" />
-                        <asp:Button ID="btnDescargar" runat="server" Text="⬇ Descargar" CssClass="btn btn-descargar" />
-                    </div>
+                        <div class="detail-group">
+                            <span class="detail-label">SHA256: </span>
+                            <asp:Label ID="lblSHA256" runat="server" CssClass="detail-value"></asp:Label>
+                        </div>
+
+                        <div class="button-group">
+                            <asp:Button ID="btnEditor" runat="server" Text="✎ Editor" CssClass="btn btn-editor" />
+                            <asp:Button ID="btnDescargar" runat="server" Text="⬇ Descargar" CssClass="btn btn-descargar" OnClick="btnDescargar_Click" />
+                        </div>
+                    </asp:Panel>
                 </div>
 
                 <!-- Right Scrollbar Decoration -->
