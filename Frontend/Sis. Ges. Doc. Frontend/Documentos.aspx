@@ -16,15 +16,29 @@
         .sidebar h3 { margin:0 0 12px; font-size:18px; color:#666; }
         .filter-group { border-top:1px solid #eee; padding-top:12px; margin-top:8px; }
         .filter-item { margin:8px 0; color:#444; }
+        .filter-control { width:100%; box-sizing:border-box; padding:8px; border:1px solid #ddd; border-radius:4px; margin:4px 0 10px; }
+        .filter-list label { display:block; margin:8px 0; color:#444; }
+        .clear-btn { width:100%; background:#fff; border:1px solid #ccc; padding:9px 10px; border-radius:6px; cursor:pointer; color:#444; margin-top:12px; }
         .main { flex:1; }
         .search-wrapper { display:flex; align-items:center; gap:8px; margin-bottom:18px; }
         .search-input { flex:1; padding:10px 12px; border:2px solid #e0e0e0; border-radius:6px; font-size:16px; }
         .search-btn { background:#fff; border:2px solid #e0e0e0; padding:8px 12px; border-radius:6px; cursor:pointer; }
         .doc-list { background:#fff; border:1px solid #ddd; min-height:300px; max-height:520px; overflow:auto; padding:12px 16px; }
-        .doc-item { padding:12px 8px; border-bottom:1px dashed #e6e6e6; color:#444; display:flex; justify-content:space-between; align-items:center; }
-        .doc-item:last-child { border-bottom:none; }
-        .doc-title { font-size:16px; }
-        .doc-action { width:48px; text-align:center; color:#6aa84f; font-weight:bold; }
+        .doc-table { width:100%; border-collapse:collapse; color:#444; }
+        .doc-table th { text-align:left; padding:10px 8px; border-bottom:1px solid #ddd; color:#666; font-size:14px; }
+        .doc-table td { padding:12px 8px; border-bottom:1px dashed #e6e6e6; vertical-align:middle; }
+        .doc-table tr:last-child td { border-bottom:none; }
+        .doc-title { font-size:16px; color:#2f6fad; text-decoration:none; }
+        .doc-title:hover { text-decoration:underline; }
+        .empty-message { color:#666; padding:16px 8px; }
+        .error-message { color:#b00020; margin-bottom:12px; }
+        .filter-list { list-style-type: none; padding: 0; margin: 0; }
+        .filter-list li { display: flex; align-items: center; margin: 8px 0; }
+        .filter-list input[type="checkbox"] { margin-right: 8px; }
+        .filter-list label { display: inline; margin: 0; color:#444; }
+        .category-dropdown { cursor: pointer; user-select: none; }
+        .category-items { display: none; padding-left: 16px; }
+        .category-items.show { display: block; }
         /* responsive */
         @media(max-width:800px){ .content{flex-direction:column;} .sidebar{width:100%;} }
     </style>
@@ -45,31 +59,71 @@
             <aside class="sidebar">
                 <h3>Filtros</h3>
                 <div class="filter-group">
-                    <div style="font-weight:600; margin-bottom:8px;">Categoría 1 ▾</div>
-                    <label class="filter-item"><input type="checkbox" /> Item</label>
-                    <label class="filter-item"><input type="checkbox" /> Item</label>
-                    <label class="filter-item"><input type="checkbox" /> Item</label>
+                            <div class="category-dropdown" style="font-weight:600; margin-bottom:8px;" onclick="toggleCategoryDropdown()">Categoría ▾</div>
+                            <div class="category-items" id="categoryItems">
+                                <asp:CheckBoxList ID="cblCategorias" runat="server" CssClass="filter-list" AutoPostBack="true" OnSelectedIndexChanged="Filter_Changed" />
+                            </div>
+                        </div>
+                <div class="filter-group">
+                    <div style="font-weight:600; margin-bottom:8px;">Fecha</div>
+                    <label class="filter-item" for="txtFechaInicio">Inicio</label>
+                    <asp:TextBox ID="txtFechaInicio" runat="server" CssClass="filter-control" TextMode="Date" AutoPostBack="true" OnTextChanged="Filter_Changed" />
+                    <label class="filter-item" for="txtFechaFin">Fin</label>
+                    <asp:TextBox ID="txtFechaFin" runat="server" CssClass="filter-control" TextMode="Date" AutoPostBack="true" OnTextChanged="Filter_Changed" />
                 </div>
+                <asp:Button ID="btnLimpiarFiltros" runat="server" Text="Limpiar filtros" CssClass="clear-btn" OnClick="btnLimpiarFiltros_Click" />
             </aside>
 
             <section class="main">
                 <div class="search-wrapper">
-                    <input type="text" placeholder="Buscar..." class="search-input" />
-                    <button type="button" class="search-btn">🔍</button>
+                    <asp:TextBox ID="txtBuscar" runat="server" placeholder="Buscar..." CssClass="search-input" AutoPostBack="true" OnTextChanged="Filter_Changed" />
+                    <asp:Button ID="btnBuscar" runat="server" Text="🔍" CssClass="search-btn" OnClick="Filter_Changed" />
                 </div>
 
                 <div class="doc-list" id="docList">
-                    <div class="doc-item"><div class="doc-title">Doc 1...</div><div class="doc-action">›</div></div>
-                    <div class="doc-item"><div class="doc-title">Doc 2...</div><div class="doc-action">›</div></div>
-                    <div class="doc-item"><div class="doc-title">Doc 3...</div><div class="doc-action">›</div></div>
-                    <div class="doc-item"><div class="doc-title">Doc 4...</div><div class="doc-action">›</div></div>
-                    <div class="doc-item"><div class="doc-title">Doc 5...</div><div class="doc-action">›</div></div>
-                    <div class="doc-item"><div class="doc-title">Doc 6...</div><div class="doc-action">›</div></div>
-                    <div class="doc-item"><div class="doc-title">Doc 7...</div><div class="doc-action">›</div></div>
-                    <div class="doc-item"><div class="doc-title">Doc 8...</div><div class="doc-action">›</div></div>
+                    <asp:Label ID="lblError" runat="server" CssClass="error-message" Visible="false" />
+                    <asp:Repeater ID="rptDocumentos" runat="server">
+                        <HeaderTemplate>
+                            <table class="doc-table">
+                                <thead>
+                                    <tr>
+                                        <th>NombreDocumento</th>
+                                        <th>Categoría</th>
+                                        <th>FechaDocumento</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                        </HeaderTemplate>
+                        <ItemTemplate>
+                            <tr>
+                                <td><a class="doc-title" href='<%# "detalles.aspx?id=" + Eval("IdDocumento") %>'><%#: Eval("NombreDocumento") %></a></td>
+                                <td><%#: Eval("Categoria") %></td>
+                                <td><%#: Eval("FechaDocumentoTexto") %></td>
+                            </tr>
+                        </ItemTemplate>
+                        <FooterTemplate>
+                                </tbody>
+                            </table>
+                        </FooterTemplate>
+                    </asp:Repeater>
+                    <asp:Panel ID="pnlSinResultados" runat="server" CssClass="empty-message" Visible="false">
+                        No se encontraron documentos.
+                    </asp:Panel>
                 </div>
             </section>
         </div>
     </form>
+    <script>
+        function toggleCategoryDropdown() {
+            var items = document.getElementById('categoryItems');
+            items.classList.toggle('show');
+            var arrow = document.querySelector('.category-dropdown');
+            if (items.classList.contains('show')) {
+                arrow.innerHTML = 'Categoría △';
+            } else {
+                arrow.innerHTML = 'Categoría ▾';
+            }
+        }
+    </script>
 </body>
 </html>
