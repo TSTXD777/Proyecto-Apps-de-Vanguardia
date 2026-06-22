@@ -8,84 +8,177 @@
     <title>Gestión de Usuarios</title>
 
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f5f5f5;
-            margin: 0;
-        }
+        body{
+    font-family:'Segoe UI',sans-serif;
+    background:#eef2f7;
+    margin:0;
+}
 
-        .header {
-            background-color: #2e7d32;
-            color: white;
-            padding: 15px 25px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+/* HEADER */
 
-        .header a {
-            color: white;
-            text-decoration: none;
-            font-size: 22px;
-        }
+.header{
+    background:linear-gradient(135deg,#1b5e20,#2e7d32);
+    color:white;
+    padding:20px 30px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 4px 15px rgba(0,0,0,.15);
+}
 
-        .container {
-            padding: 30px;
-        }
+.header h2{
+    margin:0;
+    font-size:38px;
+}
 
-        .formulario {
-            background: white;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 25px;
-        }
+.header a{
+    color:white;
+    text-decoration:none;
+    font-size:28px;
+}
 
-        .formulario h3 {
-            margin-top: 0;
-            color: #2e7d32;
-        }
+/* LAYOUT */
 
-        .campo {
-            margin-bottom: 15px;
-        }
+.container{
+    padding:30px;
+    display:flex;
+    gap:25px;
+    align-items:flex-start;
+}
 
-        .campo label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
+/* FORMULARIO */
 
-        .campo input,
-        .campo select {
-            width: 350px;
-            padding: 8px;
-        }
+.formulario{
+    width:400px;
+    background:white;
+    border:none;
+    border-radius:18px;
+    padding:25px;
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+}
 
-        .btn {
-            background-color: #2e7d32;
-            color: white;
-            border: none;
-            padding: 10px 18px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
+.formulario h3{
+    margin-top:0;
+    margin-bottom:25px;
+    color:#2e7d32;
+    font-size:26px;
+}
 
-        .btn:hover {
-            background-color: #256428;
-        }
+.campo{
+    margin-bottom:18px;
+}
 
-        .mensaje {
-            margin-top: 10px;
-            font-weight: bold;
-        }
+.campo label{
+    display:block;
+    margin-bottom:8px;
+    font-weight:600;
+    color:#333;
+}
 
-        .grid {
-            width: 100%;
-        }
+.campo input,
+.campo select,
+.formulario input[type=text],
+.formulario input[type=password],
+.formulario select{
 
-        .grid th {
-            background-color: #2e7d32;
+    width:100%;
+    padding:12px;
+    border:1px solid #dcdcdc;
+    border-radius:10px;
+    font-size:15px;
+    box-sizing:border-box;
+}
+
+/* BOTON */
+
+.btn{
+    width:100%;
+    background:#2e7d32;
+    color:white;
+    border:none;
+    padding:14px;
+    border-radius:10px;
+    font-size:15px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.btn:hover{
+    background:#256428;
+}
+
+/* MENSAJE */
+
+.mensaje{
+    display:block;
+    margin-top:15px;
+    font-weight:600;
+}
+
+/* TABLA */
+
+.grid{
+    flex:1;
+    width:100%;
+    background:white;
+    border-collapse:collapse;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+}
+
+.grid th{
+    background:#2e7d32;
+    color:white;
+    padding:16px;
+    text-align:left;
+    font-size:15px;
+}
+
+.grid td{
+    padding:15px;
+    border-bottom:1px solid #ececec;
+}
+
+.grid tr:nth-child(even){
+    background:#fafafa;
+}
+
+.grid tr:hover{
+    background:#f5faf5;
+}
+
+/* BOTON EDITAR */
+
+.grid input[type=submit],
+.grid input[type=button]{
+    background:#1976d2;
+    color:white;
+    border:none;
+    padding:8px 14px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.grid input[type=submit]:hover,
+.grid input[type=button]:hover{
+    background:#1259a7;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1000px){
+
+    .container{
+        flex-direction:column;
+    }
+
+    .formulario{
+        width:100%;
+    }
+
+}background-color: #2e7d32;
             color: white;
             padding: 10px;
         }
