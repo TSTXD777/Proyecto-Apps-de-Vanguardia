@@ -39,6 +39,81 @@
         .category-dropdown { cursor: pointer; user-select: none; }
         .category-items { display: none; padding-left: 16px; }
         .category-items.show { display: block; }
+        .document-card{
+    background:#fff;
+    border-radius:18px;
+    padding:20px;
+    margin-bottom:15px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+    transition:.3s;
+}
+
+.document-card:hover{
+    transform:translateY(-3px);
+    box-shadow:0 10px 25px rgba(0,0,0,.12);
+}
+
+.document-icon{
+    font-size:40px;
+    margin-right:20px;
+}
+
+.document-info{
+    flex:1;
+}
+
+.document-title a{
+    text-decoration:none;
+    font-size:18px;
+    font-weight:600;
+    color:#1b5e20;
+}
+
+.document-title a:hover{
+    color:#2e7d32;
+}
+
+.document-meta{
+    margin-top:6px;
+    color:#666;
+    font-size:14px;
+}
+
+.view-btn{
+    background:#2e7d32;
+    color:white;
+    text-decoration:none;
+    padding:10px 18px;
+    border-radius:10px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.view-btn:hover{
+    background:#256428;
+}
+
+@media(max-width:768px){
+
+    .document-card{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:15px;
+    }
+
+    .document-action{
+        width:100%;
+    }
+
+    .view-btn{
+        display:block;
+        text-align:center;
+    }
+
+}
         /* responsive */
         @media(max-width:800px){ .content{flex-direction:column;} .sidebar{width:100%;} }
     </style>
@@ -83,29 +158,49 @@
                 <div class="doc-list" id="docList">
                     <asp:Label ID="lblError" runat="server" CssClass="error-message" Visible="false" />
                     <asp:Repeater ID="rptDocumentos" runat="server">
-                        <HeaderTemplate>
-                            <table class="doc-table">
-                                <thead>
-                                    <tr>
-                                        <th>NombreDocumento</th>
-                                        <th>Categoría</th>
-                                        <th>FechaDocumento</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                        </HeaderTemplate>
-                        <ItemTemplate>
-                            <tr>
-                                <td><a class="doc-title" href='<%# "detalles.aspx?id=" + Eval("IdDocumento") %>'><%#: Eval("NombreDocumento") %></a></td>
-                                <td><%#: Eval("Categoria") %></td>
-                                <td><%#: Eval("FechaDocumentoTexto") %></td>
-                            </tr>
-                        </ItemTemplate>
-                        <FooterTemplate>
-                                </tbody>
-                            </table>
-                        </FooterTemplate>
-                    </asp:Repeater>
+
+    <ItemTemplate>
+
+        <div class="document-card">
+
+            <div class="document-icon">
+                📄
+            </div>
+
+            <div class="document-info">
+
+                <div class="document-title">
+                    <a href='<%# "detalles.aspx?id=" + Eval("IdDocumento") %>'>
+                        <%#: Eval("NombreDocumento") %>
+                    </a>
+                </div>
+
+                <div class="document-meta">
+                    Categoría:
+                    <%#: Eval("Categoria") %>
+                </div>
+
+                <div class="document-meta">
+                    Fecha:
+                    <%#: Eval("FechaDocumentoTexto") %>
+                </div>
+
+            </div>
+
+            <div class="document-action">
+
+                <a class="view-btn"
+                    href='<%# "detalles.aspx?id=" + Eval("IdDocumento") %>'>
+                    Ver Documento
+                </a>
+
+            </div>
+
+        </div>
+
+    </ItemTemplate>
+
+</asp:Repeater>
                     <asp:Panel ID="pnlSinResultados" runat="server" CssClass="empty-message" Visible="false">
                         No se encontraron documentos.
                     </asp:Panel>
